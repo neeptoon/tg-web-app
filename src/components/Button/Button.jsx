@@ -1,11 +1,11 @@
 import React from 'react';
 
 
-const Button = ({handleClick}) => {
+const Button = ({webAppClose, children}) => {
     return (
         <>
-            <button onClick={handleClick}>
-                закрыть
+            <button onClick={webAppClose}>
+                {children}
             </button>
         </>
     );

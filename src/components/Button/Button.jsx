@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const Button = ({webAppClose, children}) => {
+export const Button = ({webAppClose, children}) => {
     return (
         <>
             <button onClick={webAppClose}>
@@ -11,4 +11,3 @@ const Button = ({webAppClose, children}) => {
     );
 };
 
-export default Button;

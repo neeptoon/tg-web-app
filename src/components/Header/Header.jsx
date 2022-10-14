@@ -1,8 +1,9 @@
 import React from 'react';
 
-import Button from '../Button/Button';
-
 import {useTelegram} from '../../hooks/useTelegram';
+
+import {Button} from '../Button';
+
 
 import classes from './Header.module.scss';
 

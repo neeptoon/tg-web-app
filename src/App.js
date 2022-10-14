@@ -1,24 +1,25 @@
-import './App.css';
-import {useEffect} from "react";
+import {useEffect} from 'react';
 
-const tg = window.Telegram.WebApp
+import Button from './components/Button/Button';
 
+const tg = window.Telegram.WebApp;
 
+const b = 3;
 
 function App() {
 
     useEffect(() => {
-        tg.ready()
-    }, [])
+        tg.ready();
+    }, []);
 
     const handleClick = () => {
         tg.close();
-    }
+    };
 
     return (
         <>
             <h1>hello tg-app</h1>
-            <button onClick={handleClick}>закрыть</button>
+            <Button/>
         </>
     );
 }

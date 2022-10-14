@@ -16,7 +16,7 @@ function App() {
 
     return (
         <>
-            <h1>hello tg-app</h1>
+            <h1>HELLO TG APP</h1>
             <Button/>
         </>
     );

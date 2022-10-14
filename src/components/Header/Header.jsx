@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Button from '../Button';
+import Button from '../Button/Button';
 
 import {useTelegram} from '../../hooks/useTelegram';
 
@@ -9,7 +9,7 @@ import classes from './Header.module.scss';
 
 export const Header = () => {
 
-    const [webAppClose, user] = useTelegram();
+    const {webAppClose, user} = useTelegram();
 
     return (
         <div className={classes.header}>

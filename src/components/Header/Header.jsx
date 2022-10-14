@@ -7,7 +7,7 @@ import {useTelegram} from '../../hooks/useTelegram';
 import classes from './Header.module.scss';
 
 
-const Header = () => {
+export const Header = () => {
 
     const [webAppClose, user] = useTelegram();
 
@@ -19,4 +19,3 @@ const Header = () => {
     );
 };
 
-export default Header;

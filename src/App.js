@@ -7,17 +7,17 @@ const tg = window.Telegram.WebApp;
 function App() {
 
     useEffect(() => {
-        tg.ready()
-    }, [])
+        tg.ready();
+    }, []);
 
     const handleClick = () => {
         tg.close();
-    }
+    };
 
     return (
         <>
             <h1>HELLO TG APP</h1>
-            <Button/>
+            <Button handleClick={handleClick}/>
         </>
     );
 }

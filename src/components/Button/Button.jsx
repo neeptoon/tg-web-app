@@ -1,11 +1,12 @@
 import React from 'react';
 
-import styles from './Button.module.scss';
 
-const Button = () => {
+const Button = ({handleClick}) => {
     return (
         <>
-            <button className={styles.btn} onClick={() => {}}>закрыть</button>
+            <button onClick={handleClick}>
+                закрыть
+            </button>
         </>
     );
 };

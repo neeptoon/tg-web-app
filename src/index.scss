@@ -1,15 +1,5 @@
-@import-normalize;
-
-html {
-    box-sizing: border-box;
-}
-*, *:before, *:after {
-    box-sizing: inherit;
-}
-
-
 body {
-    font-family: 'Space Mono', monospace;
+    font-family: 'Space Mono', monospace !important;
     font-weight: 400;
     margin: 0;
     background-color: var(--tg-theme-bg-color);

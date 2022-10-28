@@ -7,6 +7,7 @@ export const theme = createTheme({
             styleOverrides: {
                 body: {
                     fontFamily: 'Source Sans Pro, sans-serif',
+                    'backgroundColor': '#EFEFEF'
                 }
             }
         }

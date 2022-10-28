@@ -1,9 +1,14 @@
 import {useEffect} from 'react';
 
-import {Button, Slider, Typography} from '@mui/material';
+import {Routes, Route, Link} from 'react-router-dom';
 
-import {Header} from './components/Header';
+import {Homepage} from './pages/Homepage';
+import {Quizpage} from './pages/Quizpage';
+import {Notfoundpage} from './pages/Notfoundpage';
+import {Article} from './pages/Article';
+
 import {useTelegram} from './hooks/useTelegram';
+
 
 
 function App() {
@@ -16,18 +21,18 @@ function App() {
 
     return (
         <>
-            <h1>hello woerlsldf</h1>
-            <Header/>
-            <button>toggle</button>
-            <Button variant="contained">hello from material button</Button>
-            <Typography variant="button">Это для добавления типографики</Typography>
+            <header>
+                <Link to={'/'}>Home</Link>
+                <Link to={'/quiz'}>Quiz</Link>
+                <Link to={'/article'}>Article</Link>
+            </header>
+            <Routes>
+                <Route path="/" element={<Homepage/>}/>
+                <Route path="/quiz" element={<Quizpage/>}/>
+                <Route path="/article" element={<Article/>}/>
+                <Route path="*" element={<Notfoundpage/>}/>
+            </Routes>
 
-            <Slider
-                size="small"
-                defaultValue={70}
-                aria-label="Small"
-                valueLabelDisplay="auto"
-            />
 
         </>
     );

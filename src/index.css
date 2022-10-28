@@ -1,5 +1,5 @@
 body {
-  font-family: "Space Mono", monospace !important;
+  font-family: "Space Mono", monospace;
   font-weight: 400;
   margin: 0;
   background-color: var(--tg-theme-bg-color);

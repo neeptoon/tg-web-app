@@ -14,7 +14,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
 
-export default function NestedList({title}) {
+export function NestedList({title}) {
     const [open, setOpen] = useState(true);
 
     const handleClick = () => {
@@ -71,7 +71,9 @@ export default function NestedList({title}) {
                         }}
                     >
                         <Link to={'/'}>Статья 1</Link>
-                        <ChevronRightIcon/>
+                        <ChevronRightIcon sx={{
+                            color: 'red'
+                        }}/>
                     </ListItemButton>
                 </List>
             </Collapse>

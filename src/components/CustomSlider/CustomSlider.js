@@ -38,10 +38,10 @@ function valuetext(value) {
     return `${value}`;
 }
 
-export function CustomSlider() {
+export function CustomSlider({withValue}) {
     const [value, setValue] = useState(70);
     return (
-        <Box sx={{ width: 500 }}>
+        <Box sx={{ width: 200 }}>
             <Slider
                 aria-label="Custom marks"
                 value={value}
@@ -53,6 +53,7 @@ export function CustomSlider() {
                     setValue(value);
                 }}
             />
+            {withValue && <p>{value}</p>}
             <button>отправить</button>
         </Box>
     );

@@ -1,7 +1,18 @@
+import React from 'react';
+import {useNavigate} from 'react-router-dom';
+
+import {Container} from '@mui/material';
+
+import {NestedList} from '../components/NestedList';
+
 export const Article = () => {
+    const navigate = useNavigate();
+
+    const goBack = () => navigate(-1);
     return (
-        <div>
-            hello from article
-        </div>
+        <Container>
+            <button onClick={goBack}>👈 назад</button>
+            <NestedList title={'Онбординг, день 1'}/>
+        </Container>
     );
 };

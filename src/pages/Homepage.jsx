@@ -1,5 +1,7 @@
-import {Container, Typography} from '@mui/material';
-import {useState} from 'react';
+import {Container, Divider, Typography} from '@mui/material';
+import React, {useState} from 'react';
+
+import {Link} from 'react-router-dom';
 
 import {NestedList} from '../components/NestedList';
 import {CustomSlider} from '../components/CustomSlider';
@@ -21,9 +23,9 @@ export const Homepage = () => {
                     Привет, {name}!
                 </Typography>
 
-                <NestedList title={'Онбординг, день 1'}/>
-
-                <CustomSlider/>
+                <Link to={'/quiz'}>Quiz</Link>
+                <Divider/>
+                <Link to={'/article'}>Articles</Link>
             </Container>
 
         </>

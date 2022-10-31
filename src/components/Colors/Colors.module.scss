@@ -1,0 +1,41 @@
+.colors {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    span {
+        background-color: white;
+        color: darkblue;
+    }
+
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        height: 50px;
+        outline: 1px solid orange;
+    }
+}
+
+.bg_color {
+    background-color: var(--tg-theme-bg_color);
+}
+.text_color {
+    background-color: var(--tg-theme-text_color);
+}
+.hint_color {
+    background-color: var(--tg-theme-hint_color);
+}
+.link_color {
+    background-color: var(--tg-theme-link_color);
+}
+.button_color {
+    background-color: var(--tg-theme-button_color);
+}
+.button_text_color {
+    background-color: var(--tg-theme-button_text_color);
+}
+.secondary_bg_color {
+    background-color: var(--tg-theme-secondary_bg_color);
+}

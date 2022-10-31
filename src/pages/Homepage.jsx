@@ -3,8 +3,7 @@ import React, {useState} from 'react';
 
 import {Link} from 'react-router-dom';
 
-import {NestedList} from '../components/NestedList';
-import {CustomSlider} from '../components/CustomSlider';
+import {Colors} from '../components/Colors';
 
 export const Homepage = () => {
 
@@ -26,6 +25,10 @@ export const Homepage = () => {
                 <Link to={'/quiz'}>Quiz</Link>
                 <Divider/>
                 <Link to={'/article'}>Articles</Link>
+
+                <Divider/>
+                <Colors/>
+
             </Container>
 
         </>

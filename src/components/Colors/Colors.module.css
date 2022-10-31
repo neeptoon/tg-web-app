@@ -37,11 +37,11 @@
 }
 
 .button_text_color {
-  background-color: var(--tg-theme-button-text_color);
+  background-color: var(--tg-theme-button-text-color);
 }
 
 .secondary_bg_color {
-  background-color: var(--tg-theme-secondary-bg_color);
+  background-color: var(--tg-theme-secondary-bg-color);
 }
 
 /*# sourceMappingURL=Colors.module.css.map */

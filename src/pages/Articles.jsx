@@ -5,7 +5,7 @@ import {Container} from '@mui/material';
 
 import {NestedList} from '../components/NestedList';
 
-export const Article = () => {
+export const Articles = () => {
     const navigate = useNavigate();
 
     const goBack = () => navigate(-1);

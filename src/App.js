@@ -13,10 +13,11 @@ import {useTelegram} from './hooks/useTelegram';
 
 function App() {
 
-    const {tg, onToggleButton} = useTelegram();
+    const {tg, onToggleButton, initData} = useTelegram();
 
     useEffect(() => {
         tg.ready();
+        console.log(initData)
     }, []);
 
     return (

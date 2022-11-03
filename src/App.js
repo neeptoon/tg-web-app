@@ -1,6 +1,8 @@
 import React, {useEffect} from 'react';
 
-import {Routes, Route, Link} from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
+
+
 
 import {Homepage} from './pages/Homepage';
 import {Quizpage} from './pages/Quizpage';
@@ -10,20 +12,21 @@ import {Articles} from './pages/Articles';
 
 import {useTelegram} from './hooks/useTelegram';
 
-
 function App() {
 
     const {tg, onToggleButton, initData} = useTelegram();
 
     useEffect(() => {
         tg.ready();
-        console.log(initData)
+
     }, []);
+
+
 
     return (
         <>
             <header>
-
+                {initData}
             </header>
             <Routes>
                 <Route path="/" element={<Homepage/>}/>

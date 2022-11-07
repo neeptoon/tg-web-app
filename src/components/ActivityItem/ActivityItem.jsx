@@ -1,10 +1,7 @@
-
-const ActivityItem = ({title}) => {
+export const ActivityItem = ({title}) => {
     return (
         <li>
-            <span>title</span>
+            <span>{title}</span>
         </li>
     );
 };
-
-export default ActivityItem;

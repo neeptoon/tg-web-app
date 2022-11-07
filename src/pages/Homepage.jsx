@@ -1,42 +1,57 @@
-import {Container, Typography} from '@mui/material';
+import {Container} from '@mui/material';
 import React, {useEffect, useState} from 'react';
 
 import {Link} from 'react-router-dom';
 
 import {useFetching} from '../hooks/useFetching';
-import AuthService from '../API/auth';
-import UserInfo from '../components/UserInfo/UserInfo';
-
-
+import {AuthService} from '../API/auth';
+import {UserInfo} from '../components/UserInfo';
+import {ArticleService} from '../API/article';
+import {Loader} from '../components/UI/Loader';
+import {ErrorAlert} from '../components/UI/ErrorAlert';
+import {ActivityList} from '../components/ActivityList';
 
 
 export const Homepage = () => {
+    const [info, setInfo] = useState([]);
 
-    const [userName, setUserName] = useState('');
-    const [fetchUserName, isLoading, userNameError] = useFetching(async () => {
-        const response = await AuthService.getUserName();
-        setUserName(response);
+
+    const [fetchInfo, isLoading, infoError] = useFetching(async () => {
+        const response = await Promise.all([
+            AuthService.getUserName(),
+            ArticleService.getUnreadArticlesCount(),
+            ArticleService.getUnreadArticles()
+        ]);
+        setInfo(response);
     });
 
     useEffect(() => {
-        fetchUserName();
+        fetchInfo();
     }, []);
+
+    const [name, count, articles] = info;
+
 
     return (
         <>
-            <Container>
-                <UserInfo userName={userName}/>
+            <Container sx={{paddingTop: '100px'}}>
+                {infoError && <ErrorAlert message={infoError}/>}
 
+                {
+                    isLoading
+                        ? <Loader/>
+                        : <>
+                            <UserInfo
+                                userName={name}
+                                unreadArticles={articles}
+                            />
+                            {articles && <ActivityList activities={articles}/>}
 
-                <Link to={'/quiz'}>Quiz</Link>
-
-                <Link to={'/article'}>Articles</Link>
-
-
-
-
+                            <Link to={'/quiz'}>Quiz</Link>
+                            <Link to={'/article'}>Articles</Link>
+                        </>
+                }
             </Container>
-
         </>
     );
 };

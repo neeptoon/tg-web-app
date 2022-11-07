@@ -1,11 +1,9 @@
-import ActivityItem from '../ActivityItem/ActivityItem';
+import {ActivityItem} from '../ActivityItem';
 
-const ActivityList = ({activities}) => {
+export const ActivityList = ({activities}) => {
     return (
         <ul>
-            {activities.map(activity => <ActivityItem key={activity.id}/>) }
+            {activities.map((activity, index) => <ActivityItem key={index} title={activity}/>) }
         </ul>
     );
 };
-
-export default ActivityList;

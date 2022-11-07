@@ -4,17 +4,20 @@ import {useNavigate} from 'react-router-dom';
 import {Container} from '@mui/material';
 
 import {NestedList} from '../components/NestedList';
-import ArticleService from '../API/article';
+import {ArticleService} from '../API/article';
 import {useFetching} from '../hooks/useFetching';
 
 export const Articles = () => {
     const navigate = useNavigate();
     const [articlesList, setArticlesList] = useState(null);
 
+
     const [fetchArticles, isLoading, articleError] = useFetching(async () => {
         const response = await ArticleService.getArticles();
         setArticlesList(response);
     });
+
+
 
     useEffect(() => {
         fetchArticles();

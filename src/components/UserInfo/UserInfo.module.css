@@ -1,5 +1,8 @@
 p {
   margin: 0;
 }
+p span {
+  font-weight: bold;
+}
 
 /*# sourceMappingURL=UserInfo.module.css.map */

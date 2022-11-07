@@ -9,11 +9,12 @@ import {useFetching} from '../hooks/useFetching';
 
 export const Articles = () => {
     const navigate = useNavigate();
+    const [articlesList, setArticlesList] = useState(null);
+
     const [fetchArticles, isLoading, articleError] = useFetching(async () => {
-        const response = await ArticleService.getAll();
-        setArticles(response);
+        const response = await ArticleService.getArticles();
+        setArticlesList(response);
     });
-    const [articles, setArticles] = useState(null);
 
     useEffect(() => {
         fetchArticles();

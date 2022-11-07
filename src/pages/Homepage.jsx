@@ -1,9 +1,9 @@
-import {Container, Divider, Typography} from '@mui/material';
+import {Container, Typography} from '@mui/material';
 import React, {useState} from 'react';
 
 import {Link} from 'react-router-dom';
 
-import {Colors} from '../components/Colors';
+
 
 export const Homepage = () => {
 
@@ -23,11 +23,11 @@ export const Homepage = () => {
                 </Typography>
 
                 <Link to={'/quiz'}>Quiz</Link>
-                <Divider/>
+
                 <Link to={'/article'}>Articles</Link>
 
-                <Divider/>
-                <Colors/>
+
+
 
             </Container>
 

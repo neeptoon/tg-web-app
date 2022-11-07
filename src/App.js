@@ -25,9 +25,6 @@ function App() {
 
     return (
         <>
-            <header>
-                {initData}
-            </header>
             <Routes>
                 <Route path="/" element={<Homepage/>}/>
                 <Route path="/quiz" element={<Quizpage/>}/>

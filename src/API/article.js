@@ -1,8 +1,9 @@
 import {instance} from './config';
 
 export default class ArticleService {
-    static async getAll() {
+    static async getArticles() {
         const response = await instance.get('/api/article/list/');
-        return response.data;
+        const articles = response.data.categories.find(cat => cat.name === 'Статьи');
+        return articles;
     }
 }

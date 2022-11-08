@@ -37,9 +37,9 @@ export const Homepage = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 paddingTop: '100px',
-                paddingBottom: '10vh',
+                paddingBottom: '30px',
                 maxWidth: '500px',
-                height: '100vh',
+                minHeight: '100vh',
             }}>
                 {
                     isLoading

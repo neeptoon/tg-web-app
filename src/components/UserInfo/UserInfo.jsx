@@ -11,8 +11,8 @@ export const UserInfo = ({userName, activities = 5, unreadArticles}) => {
     return (
         <>
             <PrimaryHeading content={userName}/>
-            <p>Сегодня твой третий день обучения</p>
-            <p>У тебя <span>{activities}</span> {declin(activities)}:</p>
+            <p className={classes.dayInfo}>Сегодня твой третий день обучения</p>
+            <p className={classes.activitiesInfo}>У тебя <span>{activities}</span> {declin(activities)}:</p>
         </>
     );
 };

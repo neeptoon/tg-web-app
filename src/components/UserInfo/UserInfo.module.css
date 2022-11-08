@@ -1,8 +1,18 @@
 p {
   margin: 0;
+  font-size: 16px;
+  font-weight: 400;
 }
 p span {
   font-weight: bold;
+}
+
+.dayInfo {
+  margin-bottom: 30px;
+}
+
+.activitiesInfo {
+  margin-bottom: 10px;
 }
 
 /*# sourceMappingURL=UserInfo.module.css.map */

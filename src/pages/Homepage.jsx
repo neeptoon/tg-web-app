@@ -35,21 +35,21 @@ export const Homepage = () => {
     return (
         <>
             <Container sx={{paddingTop: '100px'}}>
-                {infoError && <ErrorAlert message={infoError}/>}
-
                 {
                     isLoading
                         ? <Loader/>
-                        : <>
-                            <UserInfo
-                                userName={name}
-                                unreadArticles={articles}
-                            />
-                            {articles && <ActivityList activities={articles}/>}
+                        : infoError
+                            ? <ErrorAlert message={infoError}/>
+                            : <>
+                                <UserInfo
+                                    userName={name}
+                                    unreadArticles={articles}
+                                />
+                                {articles && <ActivityList activities={articles}/>}
+                                <Link to={'/quiz'}>Quiz</Link>
+                                <Link to={'/article'}>Articles</Link>
+                            </>
 
-                            <Link to={'/quiz'}>Quiz</Link>
-                            <Link to={'/article'}>Articles</Link>
-                        </>
                 }
             </Container>
         </>

@@ -10,6 +10,8 @@ import PrimaryHeading from '../../components/UI/PrimaryHeading/PrimaryHeading';
 
 import {Loader} from '../../components/UI/Loader';
 
+import {ErrorAlert} from '../../components/UI/ErrorAlert';
+
 import classes from './Articlespage.module.scss';
 
 export const Articlespage = () => {
@@ -29,22 +31,19 @@ export const Articlespage = () => {
     return (
         <div className={classes.articlesPage}>
             <CustomContainer>
-                <GoBackButton/>
-
-                <div className={classes.heading}>
-                    <PrimaryHeading>Статьи</PrimaryHeading>
-                </div>
-
-
-
-                {articleError && <h3>Произошла ошибка {articleError}</h3>}
-
                 {
                     isLoading
                         ? <Loader/>
-                        : <NestedList title={'Онбординг, день 1'}/>
+                        : articleError
+                            ? <ErrorAlert message={articleError}/>
+                            : <>
+                                <GoBackButton/>
+                                <div className={classes.heading}>
+                                    <PrimaryHeading>Статьи</PrimaryHeading>
+                                </div>
+                                {articlesList && <NestedList list={articlesList}/>}
+                            </>
                 }
-
 
             </CustomContainer>
         </div>

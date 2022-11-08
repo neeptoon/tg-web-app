@@ -10,7 +10,7 @@ import classes from './UserInfo.module.scss';
 export const UserInfo = ({userName, activities = 5, unreadArticles}) => {
     return (
         <>
-            <PrimaryHeading content={userName}/>
+            <PrimaryHeading>Привет, {userName}!</PrimaryHeading>
             <p className={classes.dayInfo}>Сегодня твой третий день обучения</p>
             <p className={classes.activitiesInfo}>У тебя <span>{activities}</span> {declin(activities)}:</p>
         </>

@@ -1,10 +1,10 @@
 import classes from './PrimaryHeading.module.scss';
 
 
-const PrimaryHeading = ({content}) => {
+const PrimaryHeading = ({children}) => {
     return (
         <h1 className={classes.heading}>
-            Привет, {content}!
+            {children}
         </h1>
     );
 };

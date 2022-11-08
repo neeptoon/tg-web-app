@@ -1,6 +1,8 @@
 export const globalStyles = {
     'body': {
-        '--primary-violet': '#731982'
+        '--primary-violet': '#731982',
+        '--primary-gray': '#455154',
+        '--primary-green': '#00B944',
     },
     'img': {
         'display': 'block',

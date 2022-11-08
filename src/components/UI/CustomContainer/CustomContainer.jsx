@@ -6,7 +6,6 @@ export const CustomContainer = ({children}) => {
             display: 'flex',
             flexDirection: 'column',
             maxWidth: '500px',
-            minHeight: '100vh',
         }}>
             {children}
         </Container>

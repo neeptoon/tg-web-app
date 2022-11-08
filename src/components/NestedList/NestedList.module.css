@@ -1,0 +1,48 @@
+.category {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 9px 16px 80px;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.1;
+  color: #455154;
+  background-position: center left 22px;
+  background-repeat: no-repeat;
+  background-size: 35px;
+  background-image: url(../../images/board-1.png);
+}
+.category:hover {
+  color: var(--primary-violet);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2.9px;
+}
+
+.mainIcon {
+  color: var(--primary-violet);
+}
+
+.secondIcon {
+  flex-shrink: 0;
+  width: 25px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0 10px 10px;
+  font-size: 12px;
+  line-height: 1.1;
+  text-decoration: none;
+  color: var(--primary-grey);
+}
+.item:hover {
+  color: var(--primary-green);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2.9px;
+}
+
+/*# sourceMappingURL=NestedList.module.css.map */

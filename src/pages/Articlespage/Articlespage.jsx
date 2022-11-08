@@ -1,11 +1,16 @@
 import React, {useEffect, useState} from 'react';
 
-import {Container} from '@mui/material';
-
 import {NestedList} from '../../components/NestedList';
 import {ArticleService} from '../../API/article';
 import {useFetching} from '../../hooks/useFetching';
 import {GoBackButton} from '../../components/UI/GoBackButton';
+import {CustomContainer} from '../../components/UI/CustomContainer';
+
+import PrimaryHeading from '../../components/UI/PrimaryHeading/PrimaryHeading';
+
+import {Loader} from '../../components/UI/Loader';
+
+import classes from './Articlespage.module.scss';
 
 export const Articlespage = () => {
     const [articlesList, setArticlesList] = useState(null);
@@ -17,24 +22,32 @@ export const Articlespage = () => {
     });
 
 
-
     useEffect(() => {
         fetchArticles();
     }, []);
 
     return (
-        <Container>
-            <GoBackButton/>
+        <div className={classes.articlesPage}>
+            <CustomContainer>
+                <GoBackButton/>
 
-            {articleError && <h3>Произошла ошибка {articleError}</h3>}
-
-            {
-                isLoading
-                    ? <h3>статьи грузятся...</h3>
-                    : <NestedList title={'Онбординг, день 1'}/>
-            }
+                <div className={classes.heading}>
+                    <PrimaryHeading>Статьи</PrimaryHeading>
+                </div>
 
 
-        </Container>
+
+                {articleError && <h3>Произошла ошибка {articleError}</h3>}
+
+                {
+                    isLoading
+                        ? <Loader/>
+                        : <NestedList title={'Онбординг, день 1'}/>
+                }
+
+
+            </CustomContainer>
+        </div>
+
     );
 };

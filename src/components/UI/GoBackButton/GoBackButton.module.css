@@ -1,6 +1,7 @@
 .backButton {
   padding: 0;
   margin: 0;
+  width: 50px;
   border: none;
   outline: none;
   background-color: transparent;

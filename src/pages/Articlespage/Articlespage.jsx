@@ -1,14 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {useNavigate} from 'react-router-dom';
 
 import {Container} from '@mui/material';
 
-import {NestedList} from '../components/NestedList';
-import {ArticleService} from '../API/article';
-import {useFetching} from '../hooks/useFetching';
+import {NestedList} from '../../components/NestedList';
+import {ArticleService} from '../../API/article';
+import {useFetching} from '../../hooks/useFetching';
+import {GoBackButton} from '../../components/UI/GoBackButton';
 
-export const Articles = () => {
-    const navigate = useNavigate();
+export const Articlespage = () => {
     const [articlesList, setArticlesList] = useState(null);
 
 
@@ -23,10 +22,9 @@ export const Articles = () => {
         fetchArticles();
     }, []);
 
-    const goBack = () => navigate(-1);
     return (
         <Container>
-            <button onClick={goBack}>👈 назад</button>
+            <GoBackButton/>
 
             {articleError && <h3>Произошла ошибка {articleError}</h3>}
 

@@ -7,7 +7,7 @@ import {Routes, Route} from 'react-router-dom';
 import {Homepage} from './pages/Hompage/Homepage';
 import {Quizpage} from './pages/Quizpage';
 import {Notfoundpage} from './pages/Notfoundpage';
-import {Articles} from './pages/Articles';
+import {Articlespage} from './pages/Articlespage';
 
 
 import {useTelegram} from './hooks/useTelegram';
@@ -28,7 +28,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Homepage/>}/>
                 <Route path="/quiz" element={<Quizpage/>}/>
-                <Route path="/article" element={<Articles/>}/>
+                <Route path="/article" element={<Articlespage/>}/>
                 <Route path="*" element={<Notfoundpage/>}/>
             </Routes>
         </>

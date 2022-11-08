@@ -1,14 +1,18 @@
 import {Container} from '@mui/material';
 import React, {useEffect, useState} from 'react';
 
-import {useFetching} from '../hooks/useFetching';
-import {AuthService} from '../API/auth';
-import {UserInfo} from '../components/UserInfo';
-import {ArticleService} from '../API/article';
-import {Loader} from '../components/UI/Loader';
-import {ErrorAlert} from '../components/UI/ErrorAlert';
-import {ActivityList} from '../components/ActivityList';
-import {MainNav} from '../components/MainNav';
+import {useFetching} from '../../hooks/useFetching';
+import {AuthService} from '../../API/auth';
+import {ArticleService} from '../../API/article';
+import {UserInfo} from '../../components/UserInfo';
+import {Loader} from '../../components/UI/Loader';
+import {ErrorAlert} from '../../components/UI/ErrorAlert';
+import {ActivityList} from '../../components/ActivityList';
+import {MainNav} from '../../components/MainNav';
+
+import {CustomContainer} from '../../components/UI/CustomContainer';
+
+import classes from './Homepage.module.scss';
 
 
 export const Homepage = () => {
@@ -32,15 +36,8 @@ export const Homepage = () => {
 
 
     return (
-        <>
-            <Container sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                paddingTop: '100px',
-                paddingBottom: '30px',
-                maxWidth: '500px',
-                minHeight: '100vh',
-            }}>
+        <section className={classes.homePage}>
+            <CustomContainer>
                 {
                     isLoading
                         ? <Loader/>
@@ -54,9 +51,10 @@ export const Homepage = () => {
                                 {articles && <ActivityList activities={articles}/>}
                                 <MainNav/>
                             </>
-
                 }
-            </Container>
-        </>
+            </CustomContainer>
+
+            
+        </section>
     );
 };

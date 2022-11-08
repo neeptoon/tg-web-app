@@ -29,8 +29,9 @@ export const Articlespage = () => {
     }, []);
 
     return (
-        <div className={classes.articlesPage}>
-            <CustomContainer>
+        <CustomContainer>
+            <div className={classes.articlesPage}>
+
                 {
                     isLoading
                         ? <Loader/>
@@ -45,8 +46,8 @@ export const Articlespage = () => {
                             </>
                 }
 
-            </CustomContainer>
-        </div>
+            </div>
+        </CustomContainer>
 
     );
 };

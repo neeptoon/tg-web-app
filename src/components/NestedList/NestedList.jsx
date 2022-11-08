@@ -11,10 +11,10 @@ import {ReactComponent as Arrow} from '../../images/to-article-arrow.svg';
 import classes from './NestedList.module.scss';
 
 export function NestedList({list}) {
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState({});
 
-    const handleClick = () => {
-        setOpen(!open);
+    const handleClick = (name) => {
+        setOpen({...open, ...{[name]: !open[name]} });
     };
 
     return (
@@ -22,13 +22,16 @@ export function NestedList({list}) {
             {list.map((item) => {
                 const {name, icon, articles} = item;
                 return (
-                    <List key={name} component="div" sx={{padding: '0 0 8px 0', borderBottom: '1px solid var(--primary-violet)'}}>
-                        <p className={classes.category} onClick={handleClick}>
+                    <List key={name} component="div" sx={{
+                        padding: '0 0 8px 0',
+                        borderBottom: '1px solid var(--primary-violet)'
+                    }}>
+                        <p className={classes.category} onClick={() => handleClick(name)}>
                             {name}
-                            {open ? <ExpandLess className={classes.mainIcon} /> : <ExpandMore className={classes.mainIcon} style={{transform: 'rotate(-90deg)'}}/>}
+                            {!open[name] ? <ExpandLess className={classes.mainIcon} /> : <ExpandMore className={classes.mainIcon} style={{transform: 'rotate(-90deg)'}}/>}
                         </p>
 
-                        <Collapse in={open} timeout="auto" unmountOnExit >
+                        <Collapse in={Boolean(open[name])} timeout="auto" unmountOnExit >
                             {articles.map(item => {
                                 const {id, name} = item;
                                 return (

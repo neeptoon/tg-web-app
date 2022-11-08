@@ -8,6 +8,7 @@
 }
 .backButton:hover, .backButton:focus {
   outline: none;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=GoBackButton.module.css.map */

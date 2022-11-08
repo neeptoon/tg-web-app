@@ -4,7 +4,6 @@ export class ArticleService {
     static async getArticles() {
         const response = await instance.get('/api/article/list/');
         const articles = response.data.categories.find(cat => cat.name === 'Статьи');
-        console.log(articles.subcategories);
         return articles.subcategories;
     }
 

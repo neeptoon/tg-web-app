@@ -36,8 +36,9 @@ export const Homepage = () => {
 
 
     return (
-        <section className={classes.homePage}>
-            <CustomContainer>
+        <CustomContainer>
+            <section className={classes.homePage}>
+
                 {
                     isLoading
                         ? <Loader/>
@@ -52,9 +53,8 @@ export const Homepage = () => {
                                 <MainNav/>
                             </>
                 }
-            </CustomContainer>
 
-            
-        </section>
+            </section>
+        </CustomContainer>
     );
 };

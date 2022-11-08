@@ -1,5 +1,8 @@
 export const globalStyles = {
-    img: {
+    'body': {
+        '--primary-violet': '#731982'
+    },
+    'img': {
         'display': 'block',
         'maxWidth': '100%'
     },

@@ -6,7 +6,7 @@ import {Routes, Route} from 'react-router-dom';
 
 import {Homepage} from './pages/Hompage/Homepage';
 import {Quizpage} from './pages/Quizpage';
-import {Notfoundpage} from './pages/Notfoundpage';
+import {Notfoundpage} from './pages/NotFoundpage';
 import {Articlespage} from './pages/Articlespage';
 
 

@@ -1,47 +1,16 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import {useState} from 'react';
 
 import classes from './CustomSlider.module.scss';
 
 
-const marks = [
-    {
-        value: 0,
-        label: '0',
-    },
-    {
-        value: 20,
-        label: '20',
-    },
-    {
-        value: 50,
-        label: '50',
-    },
-    {
-        value: 100,
-        label: '100',
-    },
-    {
-        value: 150,
-        label: '150',
-    },
-    {
-        value: 150,
-        label: '150',
-    },
-    {
-        value: 200,
-        label: '200',
-    },
-];
 
 function valuetext(value) {
     return `${value}`;
 }
 
-export function CustomSlider({answ, handleChange}) {
+export function CustomSlider({answ, handleChange, maxValue, marks}) {
 
     return (
         <Box sx={{ width: '97%' }}>
@@ -51,7 +20,7 @@ export function CustomSlider({answ, handleChange}) {
                 getAriaValueText={valuetext}
                 valueLabelDisplay="on"
                 marks={marks}
-                max={200}
+                max={maxValue}
                 onChange={(evt) => {
                     handleChange(evt);
                 }}
@@ -78,7 +47,14 @@ export function CustomSlider({answ, handleChange}) {
                 }}
             />
             <form className={classes.sliderForm}>
-                <input type="number" className={classes.value} name="value" value={answ} onChange={handleChange}/>
+                <input
+                    type="number"
+                    max={maxValue}
+                    className={classes.value}
+                    name="value"
+                    value={answ > maxValue ? maxValue : answ}
+                    onChange={handleChange}
+                />
                 <button className={classes.sendButton} type="submit">Отправить</button>
                 <button className={classes.changeButton} type="button">Другой вопрос</button>
             </form>

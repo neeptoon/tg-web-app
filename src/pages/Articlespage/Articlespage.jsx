@@ -6,7 +6,7 @@ import {useFetching} from '../../hooks/useFetching';
 import {GoBackButton} from '../../components/UI/GoBackButton';
 import {CustomContainer} from '../../components/UI/CustomContainer';
 
-import PrimaryHeading from '../../components/UI/PrimaryHeading/PrimaryHeading';
+import {PrimaryHeading} from '../../components/UI/PrimaryHeading';
 
 import {Loader} from '../../components/UI/Loader';
 
@@ -30,7 +30,7 @@ export const Articlespage = () => {
 
     return (
         <CustomContainer>
-            <div className={classes.articlesPage}>
+            <section className={classes.articlesPage}>
 
                 {
                     isLoading
@@ -46,7 +46,7 @@ export const Articlespage = () => {
                             </>
                 }
 
-            </div>
+            </section>
         </CustomContainer>
 
     );

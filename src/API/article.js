@@ -13,6 +13,11 @@ export class ArticleService {
         return count;
     }
 
+    static async getSingleArticle(id) {
+        const response =  await instance.get(`/api/article/${id}/`);
+        return response.data;
+    }
+
     static async getUnreadArticles() {
         return  Promise.resolve([
             'Классификация продуктов Мегафон\n' +

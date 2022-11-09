@@ -11,6 +11,7 @@ import {Articlespage} from './pages/Articlespage';
 
 
 import {useTelegram} from './hooks/useTelegram';
+import {SingleArticlepage} from './pages/SingleArticlepage';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
                 <Route path="/" element={<Homepage/>}/>
                 <Route path="/quiz" element={<Quizpage/>}/>
                 <Route path="/article" element={<Articlespage/>}/>
+                <Route path="/article/:id" element={<SingleArticlepage/>}/>
                 <Route path="*" element={<Notfoundpage/>}/>
             </Routes>
         </>

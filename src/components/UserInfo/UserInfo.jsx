@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PrimaryHeading from '../UI/PrimaryHeading/PrimaryHeading';
+import {PrimaryHeading} from '../UI/PrimaryHeading';
 
 import {declin} from '../../helpers/declin';
 

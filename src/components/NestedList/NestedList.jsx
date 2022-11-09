@@ -37,7 +37,7 @@ export function NestedList({list}) {
                                 return (
                                     <List key={id} component="div" sx={{padding: 0}}>
 
-                                        <Link className={classes.item} to={`/articles/${id}`}>
+                                        <Link className={classes.item} to={`/article/${id}`}>
                                             <p>{name}</p>
                                             <Arrow className={classes.secondIcon}/>
                                         </Link>

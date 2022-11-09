@@ -4,7 +4,7 @@ import {Routes, Route} from 'react-router-dom';
 
 
 
-import {Homepage} from './pages/Hompage/Homepage';
+import {Homepage} from './pages/Hompage';
 import {Quizpage} from './pages/Quizpage';
 import {Notfoundpage} from './pages/NotFoundpage';
 import {Articlespage} from './pages/Articlespage';

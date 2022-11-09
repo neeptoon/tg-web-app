@@ -1,0 +1,59 @@
+.sliderForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 35px;
+}
+.sliderForm button {
+  width: 160px;
+  height: 60px;
+  border-radius: 20px;
+  border: 1px solid var(--primary-violet);
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+.sliderForm button:hover {
+  cursor: pointer;
+}
+.sliderForm input[type=number] {
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+  appearance: textfield;
+}
+.sliderForm input[type=number]::-webkit-outer-spin-button,
+.sliderForm input[type=number]::-webkit-inner-spin-button {
+  display: none;
+}
+
+.value {
+  max-width: 150px;
+  margin-bottom: 30px;
+  outline: none;
+  background-color: transparent;
+  border: none;
+  text-align: center;
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 1.1;
+  color: var(--primary-violet);
+}
+
+.sendButton {
+  margin-bottom: 20px;
+  background-color: var(--primary-violet);
+  color: white;
+}
+.sendButton:hover {
+  background-color: var(--secondary-violet);
+}
+
+.changeButton {
+  background-color: transparent;
+  color: var(--primary-violet);
+}
+.changeButton:hover {
+  background-color: var(--secondary-gray);
+}
+
+/*# sourceMappingURL=CustomSlider.module.css.map */

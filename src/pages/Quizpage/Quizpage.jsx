@@ -1,7 +1,7 @@
 import {useState} from 'react';
 
 import {CustomSlider} from '../../components/CustomSlider';
-import {ToHomeButton} from '../../components/UI/ToHomeButton';
+import {ToPageLink} from '../../components/UI/ToPageLink';
 
 import {CustomContainer} from '../../components/UI/CustomContainer';
 
@@ -40,7 +40,7 @@ export const Quizpage = () => {
     return (
         <CustomContainer>
             <section className={classes.page}>
-                <ToHomeButton></ToHomeButton>
+                <ToPageLink page={'/'}/>
                 <h2 className={classes.heading}>Проверь <br/> интуицию!</h2>
                 <p className={classes.lead}>как думаешь, сколько человек в сутки пользуются этим ботом?</p>
                 <CustomSlider

@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {NestedList} from '../../components/NestedList';
 import {ArticleService} from '../../API/article';
 import {useFetching} from '../../hooks/useFetching';
-import {GoBackButton} from '../../components/UI/GoBackButton';
+import {ToPageLink} from '../../components/UI/ToPageLink';
 import {CustomContainer} from '../../components/UI/CustomContainer';
 
 import {PrimaryHeading} from '../../components/UI/PrimaryHeading';
@@ -38,7 +38,7 @@ export const Articlespage = () => {
                         : articleError
                             ? <ErrorAlert message={articleError}/>
                             : <>
-                                <GoBackButton/>
+                                <ToPageLink page={'/'}/>
                                 <div className={classes.heading}>
                                     <PrimaryHeading>Статьи</PrimaryHeading>
                                 </div>

@@ -5,10 +5,11 @@ import {useEffect, useState} from 'react';
 import {CustomContainer} from '../../components/UI/CustomContainer';
 import {useFetching} from '../../hooks/useFetching';
 import {ArticleService} from '../../API/article';
-import {GoBackButton} from '../../components/UI/GoBackButton';
 
 import {Loader} from '../../components/UI/Loader';
 import {ErrorAlert} from '../../components/UI/ErrorAlert';
+
+import {ToPageLink} from '../../components/UI/ToPageLink';
 
 import classes from './SingleArticlepage.module.scss';
 
@@ -40,7 +41,7 @@ export const SingleArticlepage = () => {
                         : articleError
                             ? <ErrorAlert message={articleError}/>
                             : <>
-                                <GoBackButton/>
+                                <ToPageLink page={'/article'}/>
                                 {article &&
                                     <>
                                         <h2 className={classes.heading}>{article.name}</h2>

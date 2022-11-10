@@ -2,11 +2,11 @@ import {Link} from 'react-router-dom';
 
 import {ReactComponent as BackArrow} from '../../../images/back-arrow.svg';
 
-import classes from './ToHomeButton.module.scss';
+import classes from './ToPageLink.module.scss';
 
-export const ToHomeButton = () => {
+export const ToPageLink = ({page}) => {
     return (
-        <Link className={classes.link} to="/">
+        <Link className={classes.link} to={page}>
             <BackArrow/>
         </Link>
     );

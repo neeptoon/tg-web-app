@@ -7,8 +7,8 @@ export class analitycService {
         );
     }
 
-    static async articeRead(title, id) {
-        await instance.put(`/api/analytics/event/article.read/${id}`,
+    static async articleRead(title, id) {
+        await instance.put(`/api/analytics/event/article.read/${id}/`,
             {target: title}
         );
     }

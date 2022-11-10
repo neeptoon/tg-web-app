@@ -5,7 +5,6 @@ export const globalStyles = {
         '--primary-green': '#00B944',
         '--secondary-violet': '#570F63',
         '--secondary-gray': '#E2E2E2',
-
     },
     'img': {
         'display': 'block',

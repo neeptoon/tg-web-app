@@ -1,6 +1,6 @@
 import {useParams} from 'react-router-dom';
 
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 
 import {CustomContainer} from '../../components/UI/CustomContainer';
 import {useFetching} from '../../hooks/useFetching';
@@ -18,38 +18,36 @@ import classes from './SingleArticlepage.module.scss';
 export const SingleArticlepage = () => {
     const {id} = useParams();
     const [article, setArticle] = useState(null);
+    const target = useRef(null);
 
     const [fetchArticle, isLoading, articleError] = useFetching(async () => {
         const response = await ArticleService.getSingleArticle(id);
         setArticle(response);
     });
 
+    const options = {
+        root: null,
+        rootMargin: '80px',
+    };
+
+    const callback = (entries, observer) => {
+        const [entry] = entries;
+        if(entry.isIntersecting) {
+            observer.unobserve(entry.target);
+            analitycService.articleRead(article.name, id);
+        }
+    };
 
     useEffect(() => {
-        document.addEventListener('scroll', scrollHandler);
-
-        return function() {
-            document.removeEventListener('scroll', scrollHandler);
-        };
-
-    }, [article]);
-
-    const scrollHandler = (evt) => {
-        const scrollHeight = evt.target.documentElement.scrollHeight;
-        const scrollTop = evt.target.documentElement.scrollTop;
-        const innerHeight = window.innerHeight;
-
-        if (scrollHeight - (scrollTop + innerHeight) < 100) {
-            {article && analitycService.articleRead(article.name, id);}
-            document.removeEventListener('scroll', scrollHandler);
+        const observer = new IntersectionObserver(callback, options);
+        if(target.current) {
+            observer.observe(target.current);
         }
-
-    };
+    }, [target, options]);
 
     useEffect(() => {
         fetchArticle();
     }, [id]);
-
 
 
     function createMarkup() {
@@ -72,11 +70,9 @@ export const SingleArticlepage = () => {
                                     <>
                                         <h2 className={classes.heading}>{article.name}</h2>
                                         <div className={classes.content} >
-                                            {/*todo uncoment after analytics send*/}
-                                            {/*<div className={classes.text} dangerouslySetInnerHTML={createMarkup()} />*/}
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab adipisci, cum, cupiditate deserunt dolor eos incidunt laboriosam natus nobis, omnis perspiciatis quis quo! Aperiam ea fugit necessitatibus nihil nisi.Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab adipisci, cum, cupiditate deserunt dolor eos incidunt laboriosam natus nobis, omnis perspiciatis quis quo! Aperiam ea fugit necessitatibus nihil nisi.Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab adipisci, cum, cupiditate deserunt dolor eos incidunt laboriosam natus nobis, omnis perspiciatis quis quo! Aperiam ea fugit necessitatibus nihil nisi.Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab adipisci, cum, cupiditate deserunt dolor eos incidunt laboriosam natus nobis, omnis perspiciatis quis quo! Aperiam ea fugit necessitatibus nihil nisi.Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab adipisci, cum, cupiditate deserunt dolor eos incidunt laboriosam natus nobis, omnis perspiciatis quis quo! Aperiam ea fugit necessitatibus nihil nisi.Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab adipisci, cum, cupiditate deserunt dolor eos incidunt laboriosam natus nobis, omnis perspiciatis quis quo! Aperiam ea fugit necessitatibus nihil nisi.Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab adipisci, cum, cupiditate deserunt dolor eos incidunt laboriosam natus nobis, omnis perspiciatis quis quo! Aperiam ea fugit necessitatibus nihil nisi.Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab adipisci, cum, cupiditate deserunt dolor eos incidunt laboriosam natus nobis, omnis perspiciatis quis quo! Aperiam ea fugit necessitatibus nihil nisi.
-                                            </p>
+                                            <div className={classes.text} dangerouslySetInnerHTML={createMarkup()} />
                                         </div>
+                                        <div ref={target} ></div>
                                     </>
                                 }
                             </>

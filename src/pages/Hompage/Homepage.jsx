@@ -1,4 +1,3 @@
-import {Container} from '@mui/material';
 import React, {useEffect, useState} from 'react';
 
 import {useFetching} from '../../hooks/useFetching';

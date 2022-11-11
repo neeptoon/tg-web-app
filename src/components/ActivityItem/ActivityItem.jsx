@@ -4,11 +4,11 @@ import {ReactComponent as Arrow} from '../../images/right-arrow.svg';
 
 import classes from './ActivityItem.module.scss';
 
-export const ActivityItem = ({title}) => {
+export const ActivityItem = ({id, name}) => {
     return (
         <li className={classes.item}>
-            <Link className={classes.link} to="/">
-                <span>{title}</span>
+            <Link className={classes.link} to={`/article/${id}`}>
+                <span>{name}</span>
                 <Arrow className={classes.arrow}/>
             </Link>
 

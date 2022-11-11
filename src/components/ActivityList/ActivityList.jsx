@@ -18,7 +18,7 @@ export const ActivityList = ({newArticles}) => {
             }
 
             <ul className={classes.list}>
-                {newArticles.map(article => <ActivityItem key={article.id} title={article.name}/>) }
+                {newArticles.map(article => <ActivityItem key={article.id} {...article}/>) }
             </ul>
         </>
 

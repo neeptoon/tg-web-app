@@ -4,7 +4,23 @@
 
 .heading {
   padding: 15px 0 30px;
-  border-bottom: 2.5px solid var(--primary-violet);
+  border-bottom: 2px solid var(--primary-violet);
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.toggle {
+  font-size: 12px;
+  color: var(--primary-violet);
+  outline: none;
+  background-color: transparent;
+  border: none;
+}
+.toggle:hover {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=Articlespage.module.css.map */

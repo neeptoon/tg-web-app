@@ -16,6 +16,7 @@ import classes from './Articlespage.module.scss';
 
 export const Articlespage = () => {
     const [articlesList, setArticlesList] = useState(null);
+    const [isExpanded, setExpanded] = useState(false);
 
 
     const [fetchArticles, isLoading, articleError] = useFetching(async () => {
@@ -28,6 +29,10 @@ export const Articlespage = () => {
         fetchArticles();
     }, []);
 
+    const handleClick = () => {
+        setExpanded(!isExpanded);
+    };
+
     return (
         <CustomContainer>
             <section className={classes.articlesPage}>
@@ -38,11 +43,16 @@ export const Articlespage = () => {
                         : articleError
                             ? <ErrorAlert message={articleError}/>
                             : <>
-                                <ToPageLink page={'/'}/>
+                                <div className={classes.wrapper}>
+                                    <ToPageLink page={'/'}/>
+                                    <button className={classes.toggle} onClick={handleClick}>
+                                        {!isExpanded ? 'Показать' : 'Скрыть'} содержание категорий
+                                    </button>
+                                </div>
                                 <div className={classes.heading}>
                                     <PrimaryHeading>Статьи</PrimaryHeading>
                                 </div>
-                                {articlesList && <NestedList list={articlesList}/>}
+                                {articlesList && <NestedList list={articlesList} isExpanded={isExpanded}/>}
                             </>
                 }
 

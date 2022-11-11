@@ -10,13 +10,13 @@ function valuetext(value) {
     return `${value}`;
 }
 
-export function CustomSlider({answ, handleChange, maxValue, marks}) {
+export function CustomSlider({value, handleChange, maxValue, marks, handleChangeQuestion}) {
 
     return (
         <Box sx={{ width: '97%' }}>
             <Slider
                 aria-label="Custom marks"
-                value={answ}
+                value={value}
                 getAriaValueText={valuetext}
                 valueLabelDisplay="on"
                 marks={marks}
@@ -52,11 +52,11 @@ export function CustomSlider({answ, handleChange, maxValue, marks}) {
                     max={maxValue}
                     className={classes.value}
                     name="value"
-                    value={answ > maxValue ? maxValue : answ}
+                    value={value > maxValue ? maxValue : value}
                     onChange={handleChange}
                 />
                 <button className={classes.sendButton} type="submit">Отправить</button>
-                <button className={classes.changeButton} type="button">Другой вопрос</button>
+                <button className={classes.changeButton} onClick={handleChangeQuestion} type="button">Другой вопрос</button>
             </form>
         </Box>
     );

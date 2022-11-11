@@ -25,18 +25,19 @@ export function index(num) {
 }
 
 function roundToMultiple(num, multiple) {
-    return Math.round(num/multiple)*multiple;
+    return Math.ceil(num/multiple)*multiple;
 }
 
 export function getMarksSlider(minValue, maxValue) {
     const ROUNDED_NUM = 5;
-    const scales = [0, 12, 25, 37, 50, 63, 75, 87, 100];
+    const scales = [0, 25,  50, 75,  100];
+    // const scales = [0, 12, 25, 37, 50, 63, 75, 87, 100];
     const result = [];
 
     scales.forEach((item, index) => {
         if (index === 0) {
             result.push({value: minValue, label: String(minValue)});
-        } else  if (index === scales.length -1) {
+        } else  if (index === scales.length - 1) {
             result.push({value: maxValue, label: String(maxValue)});
         } else {
             const val = Math.floor(maxValue * item / 100);
@@ -44,6 +45,7 @@ export function getMarksSlider(minValue, maxValue) {
             result.push({value: roundedValue, label: String(roundedValue)});
         }
     });
+    console.log(result);
 
     return result;
 }

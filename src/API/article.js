@@ -7,28 +7,13 @@ export class ArticleService {
         return articles.subcategories;
     }
 
-    static async getUnreadArticlesCount() {
-        const response = await instance.get('/api/article/notification/count/');
-        const count = response.data.count;
-        return count;
-    }
-
     static async getSingleArticle(id) {
         const response =  await instance.get(`/api/article/${id}/`);
         return response.data;
     }
 
-    static async getUnreadArticles() {
-        return  Promise.resolve([
-            'Классификация продуктов Мегафон\n' +
-            'в коллекции Мегафон для пользователей продуктов Мегафон',
-            'История успеха. Иванов Петр',
-            'Классификация продуктов Мегафон\n' +
-            'в коллекции Мегафон для пользователей продуктов Мегафон',
-            'Классификация продуктов Мегафон\n' +
-            'в коллекции Мегафон для пользователей продуктов Мегафон',
-            'Классификация продуктов Мегафон\n' +
-            'в коллекции Мегафон для пользователей продуктов Мегафон',
-        ]);
+    static async getNewArticles() {
+        const response = await instance.get('/api/article/notification/list/');
+        return response.data.articles;
     }
 }

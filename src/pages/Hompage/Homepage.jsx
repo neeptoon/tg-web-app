@@ -20,9 +20,8 @@ export const Homepage = () => {
 
     const [fetchInfo, isLoading, infoError] = useFetching(async () => {
         const response = await Promise.all([
-            AuthService.getUserName(),
-            ArticleService.getUnreadArticlesCount(),
-            ArticleService.getUnreadArticles()
+            AuthService.getUserInfo(),
+            ArticleService.getNewArticles()
         ]);
         setInfo(response);
     });
@@ -31,28 +30,23 @@ export const Homepage = () => {
         fetchInfo();
     }, []);
 
-    const [name, count, articles] = info;
+    const [user, newArticles] = info;
 
 
     return (
         <CustomContainer>
             <section className={classes.homePage}>
-
                 {
                     isLoading
                         ? <Loader/>
                         : infoError
                             ? <ErrorAlert message={infoError}/>
                             : <>
-                                <UserInfo
-                                    userName={name}
-                                    unreadArticles={articles}
-                                />
-                                {articles && <ActivityList activities={articles}/>}
+                                {user && <UserInfo user={user}/>}
+                                {newArticles && <ActivityList newArticles={newArticles}/>}
                                 <MainNav/>
                             </>
                 }
-
             </section>
         </CustomContainer>
     );

@@ -12,6 +12,8 @@ import {Articlespage} from './pages/Articlespage';
 
 import {useTelegram} from './hooks/useTelegram';
 import {SingleArticlepage} from './pages/SingleArticlepage';
+import {AppRoute} from './const';
+
 
 function App() {
 
@@ -19,7 +21,6 @@ function App() {
 
     useEffect(() => {
         tg.ready();
-
     }, []);
 
 
@@ -27,11 +28,11 @@ function App() {
     return (
         <>
             <Routes>
-                <Route path="/" element={<Homepage/>}/>
-                <Route path="/quiz" element={<Quizpage/>}/>
-                <Route path="/article" element={<Articlespage/>}/>
-                <Route path="/article/:id" element={<SingleArticlepage/>}/>
-                <Route path="*" element={<Notfoundpage/>}/>
+                <Route path={AppRoute.Root} element={<Homepage/>}/>
+                <Route path={AppRoute.Quiz} element={<Quizpage/>}/>
+                <Route path={AppRoute.Article} element={<Articlespage/>}/>
+                <Route path={AppRoute.SingleArticle} element={<SingleArticlepage/>}/>
+                <Route path={AppRoute.NotFound} element={<Notfoundpage/>}/>
             </Routes>
         </>
     );

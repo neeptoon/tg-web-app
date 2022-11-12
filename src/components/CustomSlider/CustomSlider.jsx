@@ -2,25 +2,40 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 
+import {useState} from 'react';
+
+import {getMarksSlider} from '../../helpers';
+
 import classes from './CustomSlider.module.scss';
-
-
 
 function valuetext(value) {
     return `${value}`;
 }
 
-export function CustomSlider({value, handleChange, maxValue, marks, handleChangeQuestion}) {
+export function CustomSlider({handleChangeQuestion, onSubmit, question}) {
+    const {id, text, min, max, correct, article_id} = question;
+
+    const initialState = Math.floor(Math.random() * (max - min) + min);
+
+    const [sliderValue, setSliderValue] = useState(initialState);
+
+    const handleChange = (evt) => setSliderValue(Number(evt.target.value));
+
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+        onSubmit(evt.currentTarget.answer.value);
+    };
 
     return (
         <Box sx={{ width: '97%' }}>
             <Slider
                 aria-label="Custom marks"
-                value={value}
+                value={sliderValue}
                 getAriaValueText={valuetext}
                 valueLabelDisplay="on"
-                marks={marks}
-                max={maxValue}
+                marks={getMarksSlider(min, max)}
+                min={min}
+                max={max}
                 onChange={(evt) => {
                     handleChange(evt);
                 }}
@@ -46,13 +61,13 @@ export function CustomSlider({value, handleChange, maxValue, marks, handleChange
                     },
                 }}
             />
-            <form className={classes.sliderForm}>
+            <form className={classes.sliderForm} onSubmit={handleSubmit}>
                 <input
                     type="number"
-                    max={maxValue}
+                    max={max}
                     className={classes.value}
-                    name="value"
-                    value={value > maxValue ? maxValue : value}
+                    name="answer"
+                    value={sliderValue > max ? max : sliderValue}
                     onChange={handleChange}
                 />
                 <button className={classes.sendButton} type="submit">Отправить</button>

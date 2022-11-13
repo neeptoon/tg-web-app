@@ -3,6 +3,7 @@
   flex-direction: column;
   margin-top: auto;
   padding-top: 40px;
+  width: 100%;
 }
 
 .list {

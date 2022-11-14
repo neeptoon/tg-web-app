@@ -4,14 +4,14 @@ import {useEffect, useRef, useState} from 'react';
 
 import {CustomContainer} from '../../components/UI/CustomContainer';
 import {useFetching} from '../../hooks/useFetching';
-import {ArticleService} from '../../API/article';
+import {ArticleService} from '../../services/article';
 
 import {Loader} from '../../components/UI/Loader';
 import {ErrorAlert} from '../../components/UI/ErrorAlert';
 
 import {ToPageLink} from '../../components/UI/ToPageLink';
 
-import {analitycService} from '../../API/analitycs';
+import {analitycService} from '../../services/analitycs';
 
 import classes from './SingleArticlepage.module.scss';
 

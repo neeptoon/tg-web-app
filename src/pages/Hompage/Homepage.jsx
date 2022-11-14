@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 
 import {useFetching} from '../../hooks/useFetching';
-import {AuthService} from '../../API/auth';
-import {ArticleService} from '../../API/article';
+import {AuthService} from '../../services/auth';
+import {ArticleService} from '../../services/article';
 import {UserInfo} from '../../components/UserInfo';
 import {Loader} from '../../components/UI/Loader';
 import {ErrorAlert} from '../../components/UI/ErrorAlert';
@@ -18,7 +18,7 @@ export const Homepage = () => {
     const [info, setInfo] = useState([]);
 
 
-    const [fetchInfo, isLoading, infoError] = useFetching(async () => {
+    const [fetchInfo, isLoading] = useFetching(async () => {
         const response = await Promise.all([
             AuthService.getUserInfo(),
             ArticleService.getNewArticles()
@@ -36,16 +36,13 @@ export const Homepage = () => {
     return (
         <CustomContainer>
             <section className={classes.homePage}>
-                {
-                    isLoading
-                        ? <Loader/>
-                        : infoError
-                            ? <ErrorAlert message={infoError}/>
-                            : <>
-                                {user && <UserInfo user={user}/>}
-                                {newArticles && <ActivityList newArticles={newArticles}/>}
-                                <MainNav/>
-                            </>
+                {isLoading
+                    ? <Loader/> :
+                    <>
+                        {user && <UserInfo user={user}/>}
+                        {newArticles && <ActivityList newArticles={newArticles}/>}
+                        <MainNav/>
+                    </>
                 }
             </section>
         </CustomContainer>

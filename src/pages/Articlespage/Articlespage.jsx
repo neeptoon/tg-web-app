@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
 import {NestedList} from '../../components/NestedList';
-import {ArticleService} from '../../API/article';
+import {ArticleService} from '../../services/article';
 import {useFetching} from '../../hooks/useFetching';
 import {ToPageLink} from '../../components/UI/ToPageLink';
 import {CustomContainer} from '../../components/UI/CustomContainer';
@@ -19,7 +19,7 @@ export const Articlespage = () => {
     const [isExpanded, setExpanded] = useState(false);
 
 
-    const [fetchArticles, isLoading, articleError] = useFetching(async () => {
+    const [fetchArticles, isLoading] = useFetching(async () => {
         const response = await ArticleService.getArticles();
         setArticlesList(response);
     });
@@ -40,20 +40,18 @@ export const Articlespage = () => {
                 {
                     isLoading
                         ? <Loader/>
-                        : articleError
-                            ? <ErrorAlert message={articleError}/>
-                            : <>
-                                <div className={classes.wrapper}>
-                                    <ToPageLink page={'/'}/>
-                                    <button className={classes.toggle} onClick={handleClick}>
-                                        {!isExpanded ? 'Показать' : 'Скрыть'} содержание категорий
-                                    </button>
-                                </div>
-                                <div className={classes.heading}>
-                                    <PrimaryHeading>Статьи</PrimaryHeading>
-                                </div>
-                                {articlesList && <NestedList list={articlesList} isExpanded={isExpanded}/>}
-                            </>
+                        :  <>
+                            <div className={classes.wrapper}>
+                                <ToPageLink page={'/'}/>
+                                <button className={classes.toggle} onClick={handleClick}>
+                                    {!isExpanded ? 'Показать' : 'Скрыть'} содержание категорий
+                                </button>
+                            </div>
+                            <div className={classes.heading}>
+                                <PrimaryHeading>Статьи</PrimaryHeading>
+                            </div>
+                            {articlesList && <NestedList list={articlesList} isExpanded={isExpanded}/>}
+                        </>
                 }
 
             </section>

@@ -9,7 +9,9 @@ export const useFetching = (cb) => {
             setLoading(true);
             await cb();
         } catch (err) {
-            setError(err.message);
+            console.log(err.response);
+            setError(err.response);
+
         } finally {
             setLoading(false);
         }

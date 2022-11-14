@@ -6,4 +6,9 @@ export class IntuitionService {
         const question = response.data.question;
         return question;
     }
-}
+
+    static async sendAnswer(questionId, answer) {
+        const response = await instance.put(`/api/intuition/question/${questionId}/answer/${answer}/`);
+        return response;
+    }
+};

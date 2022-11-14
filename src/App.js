@@ -8,14 +8,14 @@ import {Errorpage} from './pages/Errorpage';
 import {Articlespage} from './pages/Articlespage';
 import {useTelegram} from './hooks/useTelegram';
 import {SingleArticlepage} from './pages/SingleArticlepage';
+import {Finalpage} from './pages/Finalpage';
 import {AppRoute} from './const';
 import {AppContext} from './context';
-import {Loader} from './components/UI/Loader';
 
 
 function App() {
 
-    const {answer, error} = useContext(AppContext);
+    const {error} = useContext(AppContext);
 
 
     const {tg, onToggleButton, initData} = useTelegram();
@@ -36,6 +36,7 @@ function App() {
                 <Route path={AppRoute.Article} element={<Articlespage/>}/>
                 <Route path={AppRoute.SingleArticle} element={<SingleArticlepage/>}/>
                 <Route path={AppRoute.NotFound} element={<Errorpage code={404}/>}/>
+                <Route path={AppRoute.Final} element={<Finalpage/>}/>
             </Routes>
         </>
     );

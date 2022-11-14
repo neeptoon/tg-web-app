@@ -3,6 +3,7 @@ export const AppRoute = {
     Quiz: '/quiz',
     Article: '/article',
     SingleArticle: '/article/:id',
+    Final: '/final',
     NotFound: '*'
 };
 

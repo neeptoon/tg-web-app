@@ -6,10 +6,15 @@ export const AppRoute = {
     NotFound: '*'
 };
 
-export const HTTP_CODE ={
-    BAD_REQUEST: 400,
-    NOT_FOUND: 404,
-    UNAUTHORIZED: 401,
+export const ERROR_MESSAGE = {
+    401: 'У вас нет прав для посещения\n' +
+        'этого раздела.',
+    404: 'Страница не найдена.',
+    500: 'Внутренняя ошибка сервера'
 };
 
-export const TIMEOUT_SHOW_ERROR = 2000;
+export const ACTION = {
+    SET_ERROR: 'SET_ERROR',
+    CLEAR_ERROR: 'CLEAR_ERROR',
+    SET_ANSWER: 'SET_ANSWER'
+};

@@ -1,0 +1,18 @@
+.errorpage {
+  padding-top: 35px;
+}
+
+.button {
+  margin-bottom: 35px;
+}
+.button:hover {
+  cursor: pointer;
+}
+
+.message {
+  margin: 0 0 20px;
+  min-height: 50px;
+  font-weight: 700;
+}
+
+/*# sourceMappingURL=Errorpage.module.css.map */

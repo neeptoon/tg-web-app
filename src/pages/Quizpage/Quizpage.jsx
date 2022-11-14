@@ -6,7 +6,6 @@ import {CustomContainer} from '../../components/UI/CustomContainer';
 import {useFetching} from '../../hooks/useFetching';
 import {IntuitionService} from '../../services/intuition';
 import {Loader} from '../../components/UI/Loader';
-import {ErrorAlert} from '../../components/UI/ErrorAlert';
 
 import classes from './Quizpage.module.scss';
 
@@ -37,26 +36,20 @@ export const Quizpage = () => {
             <section className={classes.page}>
                 {isLoading
                     ? <Loader/>
-                    : questionError
-                        ? <ErrorAlert message={questionError}/>
-                        : !answerValue
-                            ? <>
-                                <ToPageLink page={'/'}/>
-                                <h2 className={classes.heading}>Проверь <br/> интуицию!</h2>
-                                {currentQuestion &&
-                                    <>
-                                        <p className={classes.lead}>{currentQuestion.question}</p>
-                                        <CustomSlider
-                                            handleChangeQuestion={handleChangeQuestion}
-                                            onSubmit={onSubmit}
-                                            question={currentQuestion}
-                                        />
-                                    </>
-                                }
+                    : <>
+                        <ToPageLink page={'/'}/>
+                        <h2 className={classes.heading}>Проверь <br/> интуицию!</h2>
+                        {currentQuestion &&
+                            <>
+                                <p className={classes.lead}>{currentQuestion.question}</p>
+                                <CustomSlider
+                                    handleChangeQuestion={handleChangeQuestion}
+                                    onSubmit={onSubmit}
+                                    question={currentQuestion}
+                                />
                             </>
-                            : <>
-                                <h1>Привет ёпта</h1>
-                            </>
+                        }
+                    </>
                 }
 
             </section>

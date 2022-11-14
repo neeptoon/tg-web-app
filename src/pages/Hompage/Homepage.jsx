@@ -5,7 +5,6 @@ import {AuthService} from '../../services/auth';
 import {ArticleService} from '../../services/article';
 import {UserInfo} from '../../components/UserInfo';
 import {Loader} from '../../components/UI/Loader';
-import {ErrorAlert} from '../../components/UI/ErrorAlert';
 import {ActivityList} from '../../components/ActivityList';
 import {MainNav} from '../../components/MainNav';
 
@@ -35,16 +34,12 @@ export const Homepage = () => {
 
     return (
         <CustomContainer>
-            <section className={classes.homePage}>
-                {isLoading
-                    ? <Loader/> :
-                    <>
-                        {user && <UserInfo user={user}/>}
-                        {newArticles && <ActivityList newArticles={newArticles}/>}
-                        <MainNav/>
-                    </>
-                }
-            </section>
+            {isLoading ? <Loader/> :
+                <section className={classes.homePage}>
+                    {user && <UserInfo user={user}/>}
+                    {newArticles && <ActivityList newArticles={newArticles}/>}
+                    <MainNav/>
+                </section>}
         </CustomContainer>
     );
 };

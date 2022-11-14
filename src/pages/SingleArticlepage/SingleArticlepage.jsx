@@ -1,16 +1,11 @@
 import {useParams} from 'react-router-dom';
-
 import {useEffect, useRef, useState} from 'react';
 
 import {CustomContainer} from '../../components/UI/CustomContainer';
 import {useFetching} from '../../hooks/useFetching';
 import {ArticleService} from '../../services/article';
-
 import {Loader} from '../../components/UI/Loader';
-import {ErrorAlert} from '../../components/UI/ErrorAlert';
-
 import {ToPageLink} from '../../components/UI/ToPageLink';
-
 import {analitycService} from '../../services/analitycs';
 
 import classes from './SingleArticlepage.module.scss';
@@ -62,20 +57,18 @@ export const SingleArticlepage = () => {
                 {
                     isLoading
                         ? <Loader/>
-                        : articleError
-                            ? <ErrorAlert message={articleError}/>
-                            : <>
-                                <ToPageLink page={'/article'}/>
-                                {article &&
-                                    <>
-                                        <h2 className={classes.heading}>{article.name}</h2>
-                                        <div className={classes.content} >
-                                            <div className={classes.text} dangerouslySetInnerHTML={createMarkup()} />
-                                        </div>
-                                        <div ref={target} ></div>
-                                    </>
-                                }
-                            </>
+                        : <>
+                            <ToPageLink page={'/article'}/>
+                            {article &&
+                                <>
+                                    <h2 className={classes.heading}>{article.name}</h2>
+                                    <div className={classes.content} >
+                                        <div className={classes.text} dangerouslySetInnerHTML={createMarkup()} />
+                                    </div>
+                                    <div ref={target} ></div>
+                                </>
+                            }
+                        </>
                 }
             </section>
         </CustomContainer>

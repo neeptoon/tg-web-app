@@ -3,6 +3,7 @@
 /.idea
 /.gitattributes
 .idea
+../.idea
 .gitattributes
 
 # dependencies

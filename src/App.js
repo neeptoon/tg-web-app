@@ -15,7 +15,7 @@ import {AppContext} from './context';
 
 function App() {
 
-    const {answer, error} = useContext(AppContext);
+    const {error} = useContext(AppContext);
 
 
     const {tg, onToggleButton, initData} = useTelegram();

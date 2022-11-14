@@ -4,40 +4,17 @@ import {CustomContainer} from '../../components/UI/CustomContainer';
 import {ToPageLink} from '../../components/UI/ToPageLink';
 import {AppRoute} from '../../const';
 
-import {diffBtwNum} from '../../helpers';
-
-import RightAnswImg from '../../assets/images/right-answer.png';
-import WrongAnswImg from '../../assets/images/wrong-answer.png';
+import {getFinalResults} from '../../helpers';
 
 import classes from './Finalpage.module.scss';
 
 
-export const Finalpage = ({}) => {
+export const Finalpage = () => {
     const navigate = useNavigate();
     const {state} = useLocation();
     const {answer, article_id, userAnswer, correct} = state;
-    console.log(state);
 
-    let image, title;
-
-    const diff = diffBtwNum(correct, userAnswer);
-
-    if(diff < 5) {
-        image = RightAnswImg;
-        title = <span>Почти <br/> правильно!</span>;
-    }
-
-    if(diff === 0) {
-        image = RightAnswImg;
-        title = <span>Совершенно <br/> точно!</span>;
-    }
-
-    if(diff > 5) {
-        image = WrongAnswImg;
-        title = 'Не совсем так!';
-    }
-
-    console.log(diff, image, title);
+    const result = getFinalResults(correct, userAnswer);
 
     return (
         <CustomContainer>
@@ -48,9 +25,9 @@ export const Finalpage = ({}) => {
                         Другой вопрос
                     </button>
                 </div>
-                <h2 className={classes.heading}>{title}</h2>
+                <h2 className={classes.heading}>{result.title}</h2>
                 <p className={classes.answer}>{answer}</p>
-                <img className={classes.image} src={image} alt="декоративное изображение"/>
+                <img className={classes.image} src={result.image} alt="декоративное изображение"/>
                 {article_id &&
                     <button
                         className={classes.article}
@@ -58,11 +35,7 @@ export const Finalpage = ({}) => {
                     Статья с ответом на вопрос
                     </button>
                 }
-
-                
-
             </section>
-
         </CustomContainer>
     );
 };

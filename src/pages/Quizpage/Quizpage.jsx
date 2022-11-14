@@ -16,26 +16,21 @@ import classes from './Quizpage.module.scss';
 export const Quizpage = () => {
     const navigate = useNavigate();
     const [currentQuestion, setCurrentQuestion] = useState({});
-    const [answerValue, setAnswerValue] = useState(null);
     const [fetchQuestion, isLoading] = useFetching(async () => {
         const response = await IntuitionService.getQuestion();
         setCurrentQuestion(response);
     });
-    const {id, question, min, max, correct, article_id, answer} = currentQuestion;
+    const {id, correct, article_id, answer} = currentQuestion;
 
     useEffect(() => {
         fetchQuestion();
-    }, []);
+    }, [id]);
 
     const onAnswer = (userAnswer) => {
-        setAnswerValue(answer);
         if(currentQuestion.id) {
             IntuitionService.sendAnswer(id, userAnswer);
         }
-
         navigate(AppRoute.Final, {state: {article_id, answer, userAnswer, correct}});
-
-
     };
 
    

@@ -12,7 +12,8 @@ function valuetext(value) {
     return `${value}`;
 }
 
-export function CustomSlider({handleChangeQuestion, onSubmit, question}) {
+export function CustomSlider({onAnswer, question, fetchQuestion}) {
+    console.log(question);
     const {id, text, min, max, correct, article_id} = question;
 
     const initialState = Math.floor(Math.random() * (max - min) + min);
@@ -23,7 +24,7 @@ export function CustomSlider({handleChangeQuestion, onSubmit, question}) {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        onSubmit(evt.currentTarget.answer.value);
+        onAnswer(evt.currentTarget.answer.value);
     };
 
     return (
@@ -71,7 +72,7 @@ export function CustomSlider({handleChangeQuestion, onSubmit, question}) {
                     onChange={handleChange}
                 />
                 <button className={classes.sendButton} type="submit">Отправить</button>
-                <button className={classes.changeButton} onClick={handleChangeQuestion} type="button">Другой вопрос</button>
+                <button className={classes.changeButton} onClick={fetchQuestion} type="button">Другой вопрос</button>
             </form>
         </Box>
     );

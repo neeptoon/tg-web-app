@@ -11,22 +11,17 @@ import classes from './Quizpage.module.scss';
 
 export const Quizpage = () => {
     const [currentQuestion, setCurrentQuestion] = useState(null);
-    const [toggleQuestion, updateQuestion] = useState(false);
     const [answerValue, setAnswerValue] = useState(null);
-    const [fetchQuestion, isLoading, questionError] = useFetching(async () => {
+    const [fetchQuestion, isLoading] = useFetching(async () => {
         const response = await IntuitionService.getQuestion();
         setCurrentQuestion(response);
     });
 
     useEffect(() => {
         fetchQuestion();
-    }, [toggleQuestion]);
+    }, []);
 
-    const handleChangeQuestion = () => {
-        updateQuestion(!toggleQuestion);
-    };
-
-    const onSubmit = (answer) => {
+    const onAnswer = (answer) => {
         setAnswerValue(answer);
     };
 
@@ -43,9 +38,9 @@ export const Quizpage = () => {
                             <>
                                 <p className={classes.lead}>{currentQuestion.question}</p>
                                 <CustomSlider
-                                    handleChangeQuestion={handleChangeQuestion}
-                                    onSubmit={onSubmit}
+                                    onAnswer={onAnswer}
                                     question={currentQuestion}
+                                    fetchQuestion={fetchQuestion}
                                 />
                             </>
                         }

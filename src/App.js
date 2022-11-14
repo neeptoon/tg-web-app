@@ -28,11 +28,6 @@ function App() {
         return <Errorpage code={error.status}/>;
     }
 
-
-
-
-
-
     return (
         <>
             <Routes>

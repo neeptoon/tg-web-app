@@ -32,3 +32,7 @@ export function getMarksSlider(minValue, maxValue) {
         {value: maxValue, label: String(maxValue)},
     ];
 }
+export function diffBtwNum(answer, userAnswer) {
+    console.log(answer, userAnswer);
+    return Math.abs(100*(Number(userAnswer) - answer)/answer);
+}

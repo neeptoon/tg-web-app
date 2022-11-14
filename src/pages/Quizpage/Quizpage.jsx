@@ -1,5 +1,7 @@
 import {useEffect, useState} from 'react';
 
+import {useNavigate} from 'react-router-dom';
+
 import {CustomSlider} from '../../components/CustomSlider';
 import {ToPageLink} from '../../components/UI/ToPageLink';
 import {CustomContainer} from '../../components/UI/CustomContainer';
@@ -7,23 +9,36 @@ import {useFetching} from '../../hooks/useFetching';
 import {IntuitionService} from '../../services/intuition';
 import {Loader} from '../../components/UI/Loader';
 
+import {AppRoute} from '../../const';
+
 import classes from './Quizpage.module.scss';
 
 export const Quizpage = () => {
-    const [currentQuestion, setCurrentQuestion] = useState(null);
+    const navigate = useNavigate();
+    const [currentQuestion, setCurrentQuestion] = useState({});
     const [answerValue, setAnswerValue] = useState(null);
     const [fetchQuestion, isLoading] = useFetching(async () => {
         const response = await IntuitionService.getQuestion();
         setCurrentQuestion(response);
     });
+    const {id, question, min, max, correct, article_id, answer} = currentQuestion;
 
     useEffect(() => {
         fetchQuestion();
     }, []);
 
-    const onAnswer = (answer) => {
+    const onAnswer = (userAnswer) => {
         setAnswerValue(answer);
+        if(currentQuestion.id) {
+            IntuitionService.sendAnswer(id, userAnswer);
+        }
+
+        navigate(AppRoute.Final, {state: {article_id, answer, userAnswer, correct}});
+
+
     };
+
+   
 
 
     return (
@@ -34,7 +49,7 @@ export const Quizpage = () => {
                     : <>
                         <ToPageLink page={'/'}/>
                         <h2 className={classes.heading}>Проверь <br/> интуицию!</h2>
-                        {currentQuestion &&
+                        {currentQuestion.id &&
                             <>
                                 <p className={classes.lead}>{currentQuestion.question}</p>
                                 <CustomSlider

@@ -13,7 +13,6 @@ function valuetext(value) {
 }
 
 export function CustomSlider({onAnswer, question, fetchQuestion}) {
-    console.log(question);
     const {id, text, min, max, correct, article_id} = question;
 
     const initialState = Math.floor(Math.random() * (max - min) + min);

@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 
-import {ReactComponent as Arrow} from '../../images/right-arrow.svg';
+import {ReactComponent as Arrow} from '../../assets/images/right-arrow.svg';
 
 import classes from './ActivityItem.module.scss';
 

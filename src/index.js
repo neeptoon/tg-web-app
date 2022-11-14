@@ -11,6 +11,8 @@ import {theme} from './theme';
 
 import {globalStyles} from './globalStyle';
 
+import {ContextProvider} from './context';
+
 
 
 
@@ -21,7 +23,9 @@ root.render(
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
                 <GlobalStyles styles={globalStyles}/>
-                <App />
+                <ContextProvider>
+                    <App/>
+                </ContextProvider>
             </ThemeProvider>
         </BrowserRouter>
     </React.StrictMode>

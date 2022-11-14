@@ -4,9 +4,9 @@ import Collapse from '@mui/material/Collapse';
 import {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 
-import {ReactComponent as ExpandLess} from '../../images/right-arrow.svg';
-import {ReactComponent as ExpandMore} from '../../images/right-arrow.svg';
-import {ReactComponent as Arrow} from '../../images/to-article-arrow.svg';
+import {ReactComponent as ExpandLess} from '../../assets/images/right-arrow.svg';
+import {ReactComponent as ExpandMore} from '../../assets/images/right-arrow.svg';
+import {ReactComponent as Arrow} from '../../assets/images/to-article-arrow.svg';
 
 import classes from './NestedList.module.scss';
 

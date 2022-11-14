@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 
-import {ReactComponent as BackArrow} from '../../../images/back-arrow.svg';
+import {ReactComponent as BackArrow} from '../../../assets/images/back-arrow.svg';
 
 import classes from './ToPageLink.module.scss';
 

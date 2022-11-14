@@ -1,7 +1,7 @@
 import {CustomContainer} from '../../components/UI/CustomContainer';
 import {PrimaryHeading} from '../../components/UI/PrimaryHeading';
 
-import Warning from '../../images/warning.png';
+import Warning from '../../assets/images/warning.png';
 import {ToPageLink} from '../../components/UI/ToPageLink';
 
 import classes from './NotFoundpage.module.scss';

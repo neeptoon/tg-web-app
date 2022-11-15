@@ -12,6 +12,38 @@
 .content {
     padding-top: 20px;
     border-top: 2px solid var(--primary-violet);
+
+    table {
+        width: 100%;
+        text-align: left;
+        border-collapse: collapse;
+        border-bottom: 2px solid #570F63;
+        border-right: 2px solid #570F63;
+        color: #570F63;
+        font-size: 8px;
+
+    }
+
+    th {
+        padding: 9px 7px;
+        color: white;
+        background-color: #731982;
+        border: 2px solid #570F63;
+    }
+
+    td {
+        padding: 9px 7px;
+        border-left: 2px solid #570F63;
+        vertical-align: center;
+    }
+
+    tr:nth-child(even) {
+        background-color: #FFFFFF;
+    }
+
+    tr:nth-child(even) {
+        background-color: #EAE1EB;
+    }
 }
 
 .text {
@@ -30,3 +62,4 @@
     }
 
 }
+

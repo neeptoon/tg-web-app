@@ -45,7 +45,7 @@ export function NestedList({list, isExpanded}) {
                         <p className={classes.category} onClick={() => handleClick(name)}>
                             <img src={icon || DefaultIcon} alt="декоративное изображение иконки категории статей"/>
                             {name}
-                            {!openedItem[name] ? <ExpandLess className={classes.mainIcon} /> : <ExpandMore className={classes.mainIcon} style={{transform: 'rotate(-90deg)'}}/>}
+                            {!openedItem[name] ? <ExpandLess className={classes.mainIcon} /> : <ExpandLess className={[classes.mainIcon, classes['mainIcon--open']].join(' ')}/>}
                         </p>
 
                         <Collapse in={Boolean(openedItem[name])} timeout="auto" unmountOnExit >

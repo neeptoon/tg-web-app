@@ -4,8 +4,7 @@ import {reducer} from '../reducer';
 import {ACTION} from '../const';
 
 const initialState = {
-    error: {},
-    answer: '',
+    error: {}
 };
 
 export const AppContext = createContext();
@@ -21,12 +20,6 @@ export const ContextProvider = ({children}) => {
     value.clearError = () => {
         dispatch({type: ACTION.CLEAR_ERROR});
     };
-
-    value.setAnswer = (answer) => {
-        dispatch({type: ACTION.SET_ANSWER, payload: answer});
-    };
-
-
 
     return <AppContext.Provider value={value}>
         {children}

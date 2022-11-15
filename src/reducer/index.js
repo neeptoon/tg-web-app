@@ -12,11 +12,6 @@ export function reducer(state, {type, payload}) {
             ...state,
             error: {}
         };
-    case ACTION.SET_ANSWER:
-        return {
-            ...state,
-            answer: payload
-        };
     default:
         return state;
     }

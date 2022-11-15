@@ -33,7 +33,7 @@ export const Errorpage = ({code}) => {
                 <PrimaryHeading>{code}</PrimaryHeading>
                 {`InitData with queryid ${initData['query_id']}`}
                 <hr/>
-                {`InitData  ${initData}`}
+                {`InitData  ${window.btoa(initData)}`}
                 <hr/>
                 {`tg  ${tg}`}
                 <p className={classes.message}>{ERROR_MESSAGE[code]}</p>

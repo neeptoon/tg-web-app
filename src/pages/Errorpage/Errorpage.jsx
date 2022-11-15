@@ -31,7 +31,11 @@ export const Errorpage = ({code}) => {
             <section className={classes.errorpage}>
                 <BackArrow className={classes.button} onClick={handleCLick}/>
                 <PrimaryHeading>{code}</PrimaryHeading>
-                {initData['query_id']}
+                {`InitData with queryid ${initData['query_id']}`}
+                <hr/>
+                {`InitData  ${initData}`}
+                <hr/>
+                {`tg  ${tg}`}
                 <p className={classes.message}>{ERROR_MESSAGE[code]}</p>
                 <img src={Warning} alt="Декоративное изображение"/></section>
         </CustomContainer>

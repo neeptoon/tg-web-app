@@ -24,7 +24,7 @@ export const Quizpage = () => {
 
     useEffect(() => {
         fetchQuestion();
-    }, [id]);
+    }, []);
 
     const onAnswer = (userAnswer) => {
         if(currentQuestion.id) {

@@ -7,6 +7,7 @@ import {Link} from 'react-router-dom';
 import {ReactComponent as ExpandLess} from '../../assets/images/right-arrow.svg';
 import {ReactComponent as ExpandMore} from '../../assets/images/right-arrow.svg';
 import {ReactComponent as Arrow} from '../../assets/images/to-article-arrow.svg';
+import DefaultIcon from '../../assets/images/board-1.png';
 
 import classes from './NestedList.module.scss';
 
@@ -42,6 +43,7 @@ export function NestedList({list, isExpanded}) {
                         borderBottom: '1px solid var(--primary-violet)'
                     }}>
                         <p className={classes.category} onClick={() => handleClick(name)}>
+                            <img src={icon || DefaultIcon} alt="декоративное изображение иконки категории статей"/>
                             {name}
                             {!openedItem[name] ? <ExpandLess className={classes.mainIcon} /> : <ExpandMore className={classes.mainIcon} style={{transform: 'rotate(-90deg)'}}/>}
                         </p>

@@ -42,8 +42,6 @@ function diffBtwNum(answer, userAnswer) {
 
 export function getFinalResults(answer, userAnswer) {
     const diff = diffBtwNum(answer, userAnswer);
-    console.log(diff, 'from getFinal');
-
 
     if(diff <= 5) {
         return {

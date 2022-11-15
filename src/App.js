@@ -18,10 +18,11 @@ function App() {
     const {error} = useContext(AppContext);
 
 
-    const {tg, onToggleButton, initData} = useTelegram();
+    const {tg} = useTelegram();
 
     useEffect(() => {
         tg.ready();
+        tg.expand();
     }, []);
 
     if(error.status) {

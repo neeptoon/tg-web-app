@@ -15,7 +15,7 @@ export const SingleArticlepage = () => {
     const [article, setArticle] = useState(null);
     const target = useRef(null);
 
-    const [fetchArticle, isLoading, articleError] = useFetching(async () => {
+    const [fetchArticle, isLoading] = useFetching(async () => {
         const response = await ArticleService.getSingleArticle(id);
         setArticle(response);
     });
@@ -66,28 +66,6 @@ export const SingleArticlepage = () => {
                                         <div className={classes.text} dangerouslySetInnerHTML={createMarkup()} />
                                     </div>
                                     <div ref={target} ></div>
-                                    <table>
-                                        <tr>
-                                            <th>привет</th>
-                                            <th>привет</th>
-                                            <th>привет</th>
-                                        </tr>
-                                        <tr>
-                                            <td>солнце встало высоко</td>
-                                            <td> а за горами тучи</td>
-                                            <td>это стоит 100 рупий</td>
-                                        </tr>
-                                        <tr>
-                                            <td>солнце встало высоко</td>
-                                            <td> а за горами тучи</td>
-                                            <td>это стоит 100 рупий</td>
-                                        </tr>
-                                        <tr>
-                                            <td>солнце встало высоко</td>
-                                            <td> а за горами тучи</td>
-                                            <td>это стоит 100 рупий</td>
-                                        </tr>
-                                    </table>
                                 </>
                             }
                         </>

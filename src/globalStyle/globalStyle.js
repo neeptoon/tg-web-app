@@ -1,5 +1,7 @@
 export const globalStyles = {
     'body': {
+        'fontFamily': 'Open Sans, sans-serif',
+        'fontWeight': 'bold',
         '--primary-violet': '#731982',
         '--primary-gray': '#455154',
         '--primary-green': '#00B944',

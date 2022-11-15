@@ -18,6 +18,7 @@
 
 .update {
   padding: 9px 0 7px 40px;
+  font-family: "Open Sans", sans-serif;
   font-size: 12px;
   font-weight: bold;
   color: var(--primary-violet);

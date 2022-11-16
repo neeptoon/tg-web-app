@@ -14,22 +14,32 @@
   border-top: 2px solid var(--primary-violet);
 }
 
+.text {
+  color: var(--primary-gray);
+  font-weight: 400;
+}
+.text h1, .text h2, .text h3, .text h4, .text h5, .text h6 {
+  line-height: 1.1;
+  margin: 0 0 10px;
+}
 .text p {
   margin-top: 0;
   font-size: 12px;
-  font-weight: 400;
   line-height: 1.1;
   text-align: left;
   color: var(--primary-gray);
 }
-.text ul {
+.text ul, .text ol {
   margin: 0 0 12px;
-  font-weight: 400;
   font-size: 12px;
   line-height: 1.1;
 }
 .text li {
   margin-bottom: 5px;
+}
+.text blockquote {
+  font-size: 12px;
+  color: var(--primary-gray);
 }
 .text img {
   margin: auto;

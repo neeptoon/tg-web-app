@@ -22,12 +22,22 @@
   text-align: left;
   color: var(--primary-gray);
 }
+.text ul {
+  margin: 0 0 12px;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.1;
+}
+.text li {
+  margin-bottom: 5px;
+}
 .text img {
   margin: auto;
   width: 100% !important;
   height: auto !important;
 }
 .text table {
+  margin-bottom: 15px;
   width: 100%;
   text-align: left;
   border-collapse: collapse;
@@ -47,11 +57,17 @@
   border-left: 2px solid #570F63;
   vertical-align: center;
 }
+.text td p {
+  color: #570F63;
+  margin: 0;
+}
 .text tr:nth-child(1) {
   padding: 9px 7px;
-  color: white;
   background-color: #731982;
   border: 2px solid #570F63;
+}
+.text tr:nth-child(1) p {
+  color: white;
 }
 .text tr:nth-child(even) {
   background-color: #FFFFFF;

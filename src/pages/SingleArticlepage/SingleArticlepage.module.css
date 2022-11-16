@@ -40,6 +40,9 @@
   background-color: #EAE1EB;
 }
 
+.text {
+  font-weight: 400;
+}
 .text p {
   margin-top: 0;
   font-size: 12px;

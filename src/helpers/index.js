@@ -43,18 +43,19 @@ function diffBtwNum(answer, userAnswer) {
 export function getFinalResults(answer, userAnswer) {
     const diff = diffBtwNum(answer, userAnswer);
 
-    if(diff <= 5) {
-        return {
-            image: RightAnswImg,
-            title: <span>Почти <br/> правильно!</span>,
-        };
-    }
-
+    console.log(diff);
 
     if(diff === 0){
         return {
             image: RightAnswImg,
             title: <span>Совершенно <br/> точно!</span>,
+        };
+    }
+
+    if(diff <= 5 && diff !== 0 ) {
+        return {
+            image: RightAnswImg,
+            title: <span>Почти <br/> правильно!</span>,
         };
     }
 

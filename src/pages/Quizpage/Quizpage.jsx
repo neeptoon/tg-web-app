@@ -20,7 +20,7 @@ export const Quizpage = () => {
         const response = await IntuitionService.getQuestion();
         setCurrentQuestion(response);
     });
-    const {id, correct, article_id, answer} = currentQuestion;
+    const {id} = currentQuestion;
 
     useEffect(() => {
         fetchQuestion();
@@ -28,13 +28,9 @@ export const Quizpage = () => {
 
     const onAnswer = (userAnswer) => {
         if(currentQuestion.id) {
-            IntuitionService.sendAnswer(id, userAnswer);
+            IntuitionService.sendAnswer(id, userAnswer).then(res => navigate(AppRoute.Final, {state: res.data}));
         }
-        navigate(AppRoute.Final, {state: {article_id, answer, userAnswer, correct}});
     };
-
-   
-
 
     return (
         <CustomContainer>
@@ -56,7 +52,6 @@ export const Quizpage = () => {
                         }
                     </>
                 }
-
             </section>
         </CustomContainer>
     );

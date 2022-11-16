@@ -11,15 +11,21 @@ import {SingleArticlepage} from './pages/SingleArticlepage';
 import {Finalpage} from './pages/Finalpage';
 import {AppRoute} from './const';
 import {AppContext} from './context';
+import {useFetching} from './hooks/useFetching';
+import {AuthService} from './services/auth';
 
 
 function App() {
     const {error} = useContext(AppContext);
     const {tg} = useTelegram();
+    const [fetchAuth] = useFetching(async () => await AuthService.getUserAuth());
 
     useEffect(() => {
         tg.ready();
         tg.expand();
+        setInterval(() => {
+            fetchAuth();
+        }, 60000);
     }, []);
 
     if(error.status) {

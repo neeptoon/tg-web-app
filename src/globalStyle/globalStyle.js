@@ -8,6 +8,9 @@ export const globalStyles = {
         '--secondary-violet': '#570F63',
         '--secondary-gray': '#E2E2E2',
     },
+    '::-webkit-scrollbar': {
+        'backgroundColor': 'var(--tg-theme-secondary-bg-color) !important',
+    },
     'img': {
         'display': 'block',
         'maxWidth': '100%'

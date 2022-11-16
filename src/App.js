@@ -14,10 +14,7 @@ import {AppContext} from './context';
 
 
 function App() {
-
     const {error} = useContext(AppContext);
-
-
     const {tg} = useTelegram();
 
     useEffect(() => {
@@ -36,7 +33,7 @@ function App() {
                 <Route path={AppRoute.Quiz} element={<Quizpage/>}/>
                 <Route path={AppRoute.Article} element={<Articlespage/>}/>
                 <Route path={AppRoute.SingleArticle} element={<SingleArticlepage/>}/>
-                <Route path={AppRoute.NotFound} element={<Errorpage code={404}/>}/>
+                <Route path={AppRoute.Error} element={<Errorpage code={404}/>}/>
                 <Route path={AppRoute.Final} element={<Finalpage/>}/>
             </Routes>
         </>

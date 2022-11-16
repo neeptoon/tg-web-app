@@ -4,7 +4,7 @@ export const AppRoute = {
     Article: '/article',
     SingleArticle: '/article/:id',
     Final: '/final',
-    NotFound: '*'
+    Error: '*'
 };
 
 export const ERROR_MESSAGE = {

@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {Routes, Route} from 'react-router-dom';
+import React, {useEffect, useRef} from 'react';
+import {Routes, Route, useNavigate} from 'react-router-dom';
 
 import {Homepage} from './pages/Hompage';
 import {Quizpage} from './pages/Quizpage';
@@ -9,19 +9,23 @@ import {useTelegram} from './hooks/useTelegram';
 import {SingleArticlepage} from './pages/SingleArticlepage';
 import {Finalpage} from './pages/Finalpage';
 import {AppRoute} from './const';
-import {useFetching} from './hooks/useFetching';
 import {AuthService} from './services/auth';
 
 
 function App() {
     const {tg} = useTelegram();
-    const [fetchAuth] = useFetching(async () => await AuthService.getUserAuth());
+    const ref = useRef(null);
+    const navigate = useNavigate();
+
+    const fetchAuth = () => AuthService.getUserAuth()
+        .catch(err => navigate(AppRoute.Error, {state: err.response.data.status}));
+
 
     useEffect(() => {
         tg.ready();
         tg.expand();
-        setInterval(fetchAuth, 60000);
-        return clearTimeout(fetchAuth);
+        ref.currnet = setInterval(fetchAuth, 60000);
+        return clearInterval(ref.current);
     }, []);
 
     return (

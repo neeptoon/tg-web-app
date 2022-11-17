@@ -8,7 +8,6 @@ export class AuthService {
     }
 
     static async getUserAuth() {
-        const response = await instance.get('/api/users/authorization/ping/');
-        return response;
+        await instance.get('/api/users/authorization/ping/');
     }
 }

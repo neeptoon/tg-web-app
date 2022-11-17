@@ -23,9 +23,8 @@ function App() {
     useEffect(() => {
         tg.ready();
         tg.expand();
-        setInterval(() => {
-            fetchAuth();
-        }, 60000);
+        setInterval(fetchAuth, 60000);
+        return clearTimeout(fetchAuth);
     }, []);
 
     if(error.status) {

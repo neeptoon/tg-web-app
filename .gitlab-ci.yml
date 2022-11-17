@@ -1,0 +1,52 @@
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - mkdir -p /kaniko/.docker
+    - >
+      echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}"
+      > /kaniko/.docker/config.json
+- >
+    - /kaniko/executor --context $CI_PROJECT_DIR
+      --use-new-run
+      --snapshotMode=redo
+      --dockerfile $CI_PROJECT_DIR/Dockerfile
+      --destination $CI_REGISTRY_IMAGE/app:$CI_COMMIT_REF_NAME
+      --destination $CI_REGISTRY_IMAGE/app:latest
+tags:
+    - nnmini
+  only:
+    - develop
+    - /^v(\d+\.)?(\d+\.)?(\*|\d+).*$/
+
+
+deploy-production:
+  stage: deploy
+  before_script:
+    - apk add --update --no-cache openssh rsync sshpass
+    - eval $(ssh-agent -s)
+    - echo "$PROD_SSH_DEPLOY_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  script:
+    - sshpass -p "$PROD_SSH_PASSWORD" ssh $PROD_SSH_CONNECTION -t "echo $CI_REGISTRY_PASSWORD | docker login $CI_REGISTRY --username $CI_REGISTRY_USER --password-stdin"
+    - sshpass -p "$PROD_SSH_PASSWORD" rsync -vizaP -e "ssh -p $PROD_SSH_PORT" ./docker-compose.yml $PROD_SSH_HOST:/var/www/app/front/
+    - sshpass -p "$PROD_SSH_PASSWORD" ssh $PROD_SSH_CONNECTION -t "cd /var/www/app/front && sed -i 's/:latest/:$CI_COMMIT_REF_NAME/g' docker-compose.yml"
+    - >
+      sshpass -p "$PROD_SSH_PASSWORD" ssh $PROD_SSH_CONNECTION -t "cd /var/www/app/front && docker stack deploy --with-registry-auth
+      --compose-file ./docker-compose.prod.yml --prune megafon_front"
+after_script:
+    - rm -rf ~/.ssh
+  environment:
+    name: production
+  tags:
+    - nnmini
+  only:
+    - /^v(\d+\.)?(\d+\.)?(\*|\d+).*$/

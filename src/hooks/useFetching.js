@@ -1,18 +1,18 @@
-import {useContext} from 'react';
 import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 
-import {AppContext} from '../context';
+import {AppRoute} from '../const';
 
 export const useFetching = (cb) => {
-    const {setError} = useContext(AppContext);
     const [isLoading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const fetching = async () => {
         try {
             setLoading(true);
             await cb();
         } catch (err) {
-            setError(err.response.data);
+            navigate(AppRoute.Error, {state: err.response.data.status});
         } finally {
             setLoading(false);
         }

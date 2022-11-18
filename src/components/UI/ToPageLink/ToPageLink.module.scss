@@ -1,3 +1,8 @@
 .link {
+    border: none;
+    background-color: transparent;
 
+    &:hover {
+        cursor: pointer;
+    }
 }

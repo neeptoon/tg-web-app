@@ -14,8 +14,10 @@ export const ERROR_MESSAGE = {
     500: 'Внутренняя ошибка сервера'
 };
 
-export const ACTION = {
-    SET_ERROR: 'SET_ERROR',
-    CLEAR_ERROR: 'CLEAR_ERROR',
-    SET_ANSWER: 'SET_ANSWER'
+export const pathToPage = {
+    '/': 'разводящая',
+    '/quiz': 'проверь интуицию',
+    '/article': 'разводящая статей',
+    '/final': 'финальная проверь интуицию',
+    '/article/3': 'наименование'
 };

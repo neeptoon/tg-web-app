@@ -19,12 +19,16 @@
   color: var(--primary-gray);
   font-weight: 400;
 }
+.text h1 {
+  font-size: 1.5em !important;
+}
 .text h1, .text h2, .text h3, .text h4, .text h5, .text h6 {
+  font-size: 1.2em;
   line-height: 1.1;
-  margin: 0 0 10px;
+  margin: 0 0 2px;
 }
 .text p {
-  margin-top: 0;
+  margin: 0 0 15px;
   font-size: 12px;
   line-height: 1.1;
   text-align: left;

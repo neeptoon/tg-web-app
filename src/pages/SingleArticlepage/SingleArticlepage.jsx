@@ -64,9 +64,9 @@ export const SingleArticlepage = () => {
                     isLoading
                         ? <Loader/>
                         : <>
-                            <ToPageLink page={AppRoute.Article}/>
                             {article &&
                                 <>
+                                    <ToPageLink page={AppRoute.Article} articleName={article.name}/>
                                     <h2 className={classes.heading}>{article.name}</h2>
                                     <div className={classes.content} >
                                         <div className={classes.text} dangerouslySetInnerHTML={createMarkup()} />

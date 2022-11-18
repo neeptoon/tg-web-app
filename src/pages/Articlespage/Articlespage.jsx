@@ -28,7 +28,7 @@ export const Articlespage = () => {
 
     useEffect(() => {
         fetchArticles();
-        analyticService.sendUserMove({source: pathToPage[location.state], target: pathToPage[location.pathname]});
+        analyticService.sendUserMove({source: pathToPage[location.state] || location.state, target: pathToPage[location.pathname]});
     }, []);
 
     const handleClick = () => {

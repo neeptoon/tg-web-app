@@ -1,10 +1,15 @@
 export const globalStyles = {
     'body': {
+        'fontFamily': 'Open Sans, sans-serif',
+        'fontWeight': 'bold',
         '--primary-violet': '#731982',
         '--primary-gray': '#455154',
         '--primary-green': '#00B944',
         '--secondary-violet': '#570F63',
         '--secondary-gray': '#E2E2E2',
+    },
+    '::-webkit-scrollbar': {
+        'backgroundColor': 'var(--tg-theme-secondary-bg-color) !important',
     },
     'img': {
         'display': 'block',

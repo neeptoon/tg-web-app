@@ -16,6 +16,7 @@
 .toggle {
   padding: 0;
   font-size: 12px;
+  font-weight: bold;
   color: var(--primary-violet);
   outline: none;
   background-color: transparent;

@@ -19,6 +19,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  border: none;
   color: var(--primary-violet);
   padding: 18px 20px 18px 85px;
   text-decoration: none;
@@ -27,11 +29,13 @@
   background-repeat: no-repeat;
   background-position: center left 20px;
   background-size: 35px;
+  background-color: transparent;
 }
 .link:hover {
   text-decoration-line: underline;
   text-decoration-thickness: 1.4px;
   text-underline-offset: 2.9px;
+  cursor: pointer;
 }
 
 .link--articles {

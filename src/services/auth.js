@@ -6,4 +6,8 @@ export class AuthService {
         const user = response.data.user;
         return user;
     }
+
+    static async getUserAuth() {
+        await instance.get('/api/users/authorization/ping/');
+    }
 }

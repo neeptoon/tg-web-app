@@ -11,11 +11,6 @@ import {theme} from './theme';
 
 import {globalStyles} from './globalStyle';
 
-import {ContextProvider} from './context';
-
-
-
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
@@ -23,9 +18,7 @@ root.render(
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
                 <GlobalStyles styles={globalStyles}/>
-                <ContextProvider>
-                    <App/>
-                </ContextProvider>
+                <App/>
             </ThemeProvider>
         </BrowserRouter>
     </React.StrictMode>

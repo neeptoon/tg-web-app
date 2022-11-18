@@ -1,16 +1,18 @@
 import List from '@mui/material/List';
 import Collapse from '@mui/material/Collapse';
-
 import {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 
 import {ReactComponent as ExpandLess} from '../../assets/images/right-arrow.svg';
-import {ReactComponent as ExpandMore} from '../../assets/images/right-arrow.svg';
 import {ReactComponent as Arrow} from '../../assets/images/to-article-arrow.svg';
+import DefaultIcon from '../../assets/images/board-1.png';
 
 import classes from './NestedList.module.scss';
 
+
 export function NestedList({list, isExpanded}) {
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const initOpenedItem = list.reduce((accum, current) => {
         accum[current.name] = false;
@@ -42,8 +44,9 @@ export function NestedList({list, isExpanded}) {
                         borderBottom: '1px solid var(--primary-violet)'
                     }}>
                         <p className={classes.category} onClick={() => handleClick(name)}>
+                            <img src={icon || DefaultIcon} alt="декоративное изображение иконки категории статей"/>
                             {name}
-                            {!openedItem[name] ? <ExpandLess className={classes.mainIcon} /> : <ExpandMore className={classes.mainIcon} style={{transform: 'rotate(-90deg)'}}/>}
+                            {!openedItem[name] ? <ExpandLess className={classes.mainIcon} /> : <ExpandLess className={[classes.mainIcon, classes['mainIcon--open']].join(' ')}/>}
                         </p>
 
                         <Collapse in={Boolean(openedItem[name])} timeout="auto" unmountOnExit >
@@ -51,11 +54,13 @@ export function NestedList({list, isExpanded}) {
                                 const {id, name} = item;
                                 return (
                                     <List key={id} component="div" sx={{padding: 0}}>
-
-                                        <Link className={classes.item} to={`/article/${id}`}>
+                                        <button
+                                            className={classes.item}
+                                            onClick={() => navigate(`/article/${id}`, {state: location.pathname})}
+                                        >
                                             <p>{name}</p>
                                             <Arrow className={classes.secondIcon}/>
-                                        </Link>
+                                        </button>
                                     </List>
                                 );
                             })}

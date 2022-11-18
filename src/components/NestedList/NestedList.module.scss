@@ -1,26 +1,40 @@
 .category {
     display: flex;
-    justify-content: space-between;
-    padding: 16px 9px 16px 80px;
+    justify-content: flex-start;
+    gap: 20px;
+    align-items: center;
+    margin: 0;
+    padding: 16px 9px 16px 13px;
     font-size: 14px;
     font-weight: bold;
     line-height: 1.1;
     color: #455154;
-    background-position: center left 22px;
-    background-repeat: no-repeat;
-    background-size: 35px;
-    background-image: url(../../assets/images/board-1.png);
+
+    img {
+        width: 34px;
+        aspect-ratio: 1;
+    }
 
     &:hover {
         color: var(--primary-violet);
         text-decoration-line: underline;
         text-decoration-thickness: 1px;
         text-underline-offset: 2.9px;
+        cursor: pointer;
     }
+
 }
 
 .mainIcon {
-    color: var(--primary-violet)
+    color: var(--primary-violet);
+    margin-left: auto;
+    flex-shrink: 0;
+    transition: 0.2s;
+}
+
+.mainIcon--open {
+    transform: rotate(-90deg);
+
 }
 
 .secondIcon {
@@ -34,15 +48,26 @@
     align-items: center;
     gap: 8px;
     padding: 10px 0 10px 10px;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    font-family: "Open Sans", sans-serif;
     font-size: 12px;
+    font-weight: bold;
     line-height: 1.1;
     text-decoration: none;
-    color: var(--primary-grey);
+
+
+    p {
+        margin: 0;
+        color: var(--primary-gray);
+    }
 
     &:hover {
         color: var(--primary-green);
         text-decoration-line: underline;
         text-decoration-thickness: 1px;
         text-underline-offset: 2.9px;
+        cursor: pointer;
     }
 }

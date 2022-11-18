@@ -12,8 +12,17 @@
 .content {
   padding-top: 20px;
   border-top: 2px solid var(--primary-violet);
+  overflow: auto;
 }
 
+.text {
+  color: var(--primary-gray);
+  font-weight: 400;
+}
+.text h1, .text h2, .text h3, .text h4, .text h5, .text h6 {
+  line-height: 1.1;
+  margin: 0 0 10px;
+}
 .text p {
   margin-top: 0;
   font-size: 12px;
@@ -21,10 +30,61 @@
   text-align: left;
   color: var(--primary-gray);
 }
+.text ul, .text ol {
+  margin: 0 0 12px;
+  font-size: 12px;
+  line-height: 1.1;
+}
+.text li {
+  margin-bottom: 5px;
+}
+.text blockquote {
+  font-size: 12px;
+  color: var(--primary-gray);
+}
 .text img {
   margin: auto;
   width: 100% !important;
   height: auto !important;
+}
+.text table {
+  margin-bottom: 15px;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+  border-bottom: 2px solid #570F63;
+  border-right: 2px solid #570F63;
+  color: #570F63;
+  font-size: 8px;
+}
+.text th {
+  padding: 9px 7px;
+  color: white;
+  background-color: #731982;
+  border: 2px solid #570F63;
+}
+.text td {
+  padding: 9px 7px;
+  border-left: 2px solid #570F63;
+  vertical-align: center;
+}
+.text td p {
+  color: #570F63;
+  margin: 0;
+}
+.text tr:nth-child(1) {
+  padding: 9px 7px;
+  background-color: #731982;
+  border: 2px solid #570F63;
+}
+.text tr:nth-child(1) p {
+  color: white;
+}
+.text tr:nth-child(even) {
+  background-color: #FFFFFF;
+}
+.text tr:nth-child(even) {
+  background-color: #EAE1EB;
 }
 
 /*# sourceMappingURL=SingleArticlepage.module.css.map */

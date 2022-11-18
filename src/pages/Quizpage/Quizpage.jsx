@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 
-import {useNavigate} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 
 import {CustomSlider} from '../../components/CustomSlider';
 import {ToPageLink} from '../../components/UI/ToPageLink';
@@ -9,7 +9,9 @@ import {useFetching} from '../../hooks/useFetching';
 import {IntuitionService} from '../../services/intuition';
 import {Loader} from '../../components/UI/Loader';
 
-import {AppRoute} from '../../const';
+import {AppRoute, pathToPage} from '../../const';
+
+import {analyticService} from '../../services/analytics';
 
 import classes from './Quizpage.module.scss';
 
@@ -20,21 +22,20 @@ export const Quizpage = () => {
         const response = await IntuitionService.getQuestion();
         setCurrentQuestion(response);
     });
-    const {id, correct, article_id, answer} = currentQuestion;
+    const {id} = currentQuestion;
+    const location = useLocation();
+
 
     useEffect(() => {
         fetchQuestion();
-    }, [id]);
+        analyticService.sendUserMove({source: pathToPage[location.state], target: pathToPage[location.pathname]});
+    }, []);
 
     const onAnswer = (userAnswer) => {
         if(currentQuestion.id) {
-            IntuitionService.sendAnswer(id, userAnswer);
+            IntuitionService.sendAnswer(id, userAnswer).then(res => navigate(AppRoute.Final, {state: {answer: res.data}}));
         }
-        navigate(AppRoute.Final, {state: {article_id, answer, userAnswer, correct}});
     };
-
-   
-
 
     return (
         <CustomContainer>
@@ -42,7 +43,7 @@ export const Quizpage = () => {
                 {isLoading
                     ? <Loader/>
                     : <>
-                        <ToPageLink page={'/'}/>
+                        <ToPageLink page={AppRoute.Root}/>
                         <h2 className={classes.heading}>Проверь <br/> интуицию!</h2>
                         {currentQuestion.id &&
                             <>
@@ -56,7 +57,6 @@ export const Quizpage = () => {
                         }
                     </>
                 }
-
             </section>
         </CustomContainer>
     );

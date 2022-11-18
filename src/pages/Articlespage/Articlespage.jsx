@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
+import {useLocation} from 'react-router-dom';
+
 import {NestedList} from '../../components/NestedList';
 import {ArticleService} from '../../services/article';
 import {useFetching} from '../../hooks/useFetching';
@@ -8,12 +10,15 @@ import {CustomContainer} from '../../components/UI/CustomContainer';
 import {PrimaryHeading} from '../../components/UI/PrimaryHeading';
 import {Loader} from '../../components/UI/Loader';
 
+import {analyticService} from '../../services/analytics';
+import {AppRoute, pathToPage} from '../../const';
+
 import classes from './Articlespage.module.scss';
 
 export const Articlespage = () => {
     const [articlesList, setArticlesList] = useState(null);
     const [isExpanded, setExpanded] = useState(false);
-
+    const location = useLocation();
 
     const [fetchArticles, isLoading] = useFetching(async () => {
         const response = await ArticleService.getArticles();
@@ -23,6 +28,7 @@ export const Articlespage = () => {
 
     useEffect(() => {
         fetchArticles();
+        analyticService.sendUserMove({source: pathToPage[location.state], target: pathToPage[location.pathname]});
     }, []);
 
     const handleClick = () => {
@@ -37,7 +43,7 @@ export const Articlespage = () => {
                         ? <Loader/>
                         :  <>
                             <div className={classes.wrapper}>
-                                <ToPageLink page={'/'}/>
+                                <ToPageLink page={AppRoute.Root}/>
                                 <button className={classes.toggle} onClick={handleClick}>
                                     {!isExpanded ? 'Показать' : 'Скрыть'} содержание категорий
                                 </button>

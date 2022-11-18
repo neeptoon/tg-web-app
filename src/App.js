@@ -1,6 +1,5 @@
-import React, {useEffect} from 'react';
-import {Routes, Route} from 'react-router-dom';
-import {useContext} from 'react';
+import React, {useEffect, useRef} from 'react';
+import {Routes, Route, useNavigate} from 'react-router-dom';
 
 import {Homepage} from './pages/Hompage';
 import {Quizpage} from './pages/Quizpage';
@@ -10,23 +9,24 @@ import {useTelegram} from './hooks/useTelegram';
 import {SingleArticlepage} from './pages/SingleArticlepage';
 import {Finalpage} from './pages/Finalpage';
 import {AppRoute} from './const';
-import {AppContext} from './context';
+import {AuthService} from './services/auth';
 
 
 function App() {
+    const {tg} = useTelegram();
+    const ref = useRef(null);
+    const navigate = useNavigate();
 
-    const {error} = useContext(AppContext);
+    const fetchAuth = () => AuthService.getUserAuth()
+        .catch(err => navigate(AppRoute.Error, {state: err.response.data.status}));
 
-
-    const {tg, onToggleButton, initData} = useTelegram();
 
     useEffect(() => {
         tg.ready();
+        tg.expand();
+        ref.currnet = setInterval(fetchAuth, 60000);
+        return clearInterval(ref.current);
     }, []);
-
-    if(error.status) {
-        return <Errorpage code={error.status}/>;
-    }
 
     return (
         <>
@@ -35,7 +35,7 @@ function App() {
                 <Route path={AppRoute.Quiz} element={<Quizpage/>}/>
                 <Route path={AppRoute.Article} element={<Articlespage/>}/>
                 <Route path={AppRoute.SingleArticle} element={<SingleArticlepage/>}/>
-                <Route path={AppRoute.NotFound} element={<Errorpage code={404}/>}/>
+                <Route path={AppRoute.Error} element={<Errorpage status={404}/>}/>
                 <Route path={AppRoute.Final} element={<Finalpage/>}/>
             </Routes>
         </>

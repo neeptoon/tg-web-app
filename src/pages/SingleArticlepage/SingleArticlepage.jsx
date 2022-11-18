@@ -1,4 +1,4 @@
-import {useParams} from 'react-router-dom';
+import {useLocation, useParams} from 'react-router-dom';
 import {useEffect, useRef, useState} from 'react';
 
 import {CustomContainer} from '../../components/UI/CustomContainer';
@@ -6,16 +6,19 @@ import {useFetching} from '../../hooks/useFetching';
 import {ArticleService} from '../../services/article';
 import {Loader} from '../../components/UI/Loader';
 import {ToPageLink} from '../../components/UI/ToPageLink';
-import {analitycService} from '../../services/analitycs';
+import {analyticService} from '../../services/analytics';
+
+import {AppRoute, pathToPage} from '../../const';
 
 import classes from './SingleArticlepage.module.scss';
 
 export const SingleArticlepage = () => {
     const {id} = useParams();
     const [article, setArticle] = useState(null);
+    const location = useLocation();
     const target = useRef(null);
 
-    const [fetchArticle, isLoading, articleError] = useFetching(async () => {
+    const [fetchArticle, isLoading] = useFetching(async () => {
         const response = await ArticleService.getSingleArticle(id);
         setArticle(response);
     });
@@ -29,7 +32,7 @@ export const SingleArticlepage = () => {
         const [entry] = entries;
         if(entry.isIntersecting) {
             observer.unobserve(entry.target);
-            analitycService.articleRead(article.name, id);
+            analyticService.articleRead(article.name, id);
         }
     };
 
@@ -44,6 +47,9 @@ export const SingleArticlepage = () => {
         fetchArticle();
     }, [id]);
 
+    if(article) {
+        analyticService.sendUserMove({source: pathToPage[location.state], target: article.name});
+    }
 
     function createMarkup() {
         if (article) {
@@ -58,7 +64,7 @@ export const SingleArticlepage = () => {
                     isLoading
                         ? <Loader/>
                         : <>
-                            <ToPageLink page={'/article'}/>
+                            <ToPageLink page={AppRoute.Article}/>
                             {article &&
                                 <>
                                     <h2 className={classes.heading}>{article.name}</h2>

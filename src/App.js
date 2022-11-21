@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Routes, Route, useNavigate} from 'react-router-dom';
 
 import {Homepage} from './pages/Hompage';
@@ -16,6 +16,8 @@ function App() {
     const {tg} = useTelegram();
     const ref = useRef(null);
     const navigate = useNavigate();
+
+    const [tlg, setTg] = useState(tg);
 
     const fetchAuth = () => AuthService.getUserAuth()
         .catch(err => navigate(AppRoute.Error, {state: err.response.data.status}));

@@ -1,12 +1,12 @@
 import {useLocation, useNavigate} from 'react-router-dom';
 
-import {tg} from '../hooks/useTelegram';
-
 import {CustomContainer} from '../../components/UI/CustomContainer';
 import {PrimaryHeading} from '../../components/UI/PrimaryHeading';
 import Warning from '../../assets/images/warning.png';
 import {ReactComponent as BackArrow} from '../../assets/images/back-arrow.svg';
 import {ERROR_MESSAGE} from '../../const';
+
+import {tg} from '../../hooks/useTelegram';
 
 import classes from './Errorpage.module.scss';
 

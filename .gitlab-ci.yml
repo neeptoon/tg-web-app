@@ -19,8 +19,6 @@ build:
       --cache-ttl=48h
       --dockerfile $CI_PROJECT_DIR/docker/Dockerfile
       --destination $CI_REGISTRY_IMAGE/app:$CI_COMMIT_REF_NAME
-      --build-arg packagerUsername=$PACKAGER_USERNAME
-      --build-arg packagerPassword=$PACKAGER_PASSWORD
   only:
    - master
    - /^v(\d+\.)?(\d+\.)?(\*|\d+).*$/

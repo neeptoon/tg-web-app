@@ -23,7 +23,7 @@ build:
    - master
    - /^v(\d+\.)?(\d+\.)?(\*|\d+).*$/
   tags:
-   - nn-mini
+   - cmg-dev-pmi-nps
 
 
 deploy-production:
@@ -53,4 +53,4 @@ deploy-production:
   only:
     - master
   tags:
-    - nn-mini
+    - cmg-dev-pmi-nps

@@ -17,8 +17,6 @@ function App() {
     const ref = useRef(null);
     const navigate = useNavigate();
 
-    const [tlg, setTg] = useState(tg);
-
     const fetchAuth = () => AuthService.getUserAuth()
         .catch(err => navigate(AppRoute.Error, {state: err.response.data.status}));
 

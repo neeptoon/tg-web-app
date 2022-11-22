@@ -64,10 +64,11 @@ export function CustomSlider({onAnswer, question, fetchQuestion}) {
             <form className={classes.sliderForm} onSubmit={handleSubmit}>
                 <input
                     type="number"
+                    min={min}
                     max={max}
                     className={classes.value}
                     name="answer"
-                    value={sliderValue > max ? max : sliderValue}
+                    value={sliderValue > max ? max : sliderValue < min ? min : sliderValue}
                     onChange={handleChange}
                 />
                 <button className={classes.sendButton} type="submit">Отправить</button>

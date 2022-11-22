@@ -23,7 +23,7 @@ build:
       --build-arg packagerPassword=$PACKAGER_PASSWORD
 
 tags:
-    - nnmini
+    - nn-mini
   only:
     - master
     - /^v(\d+\.)?(\d+\.)?(\*|\d+).*$/
@@ -54,6 +54,6 @@ after_script:
   environment:
     name: production
   tags:
-    - nnmini
+    - nn-mini
   only:
     - master

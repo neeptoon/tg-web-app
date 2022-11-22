@@ -9,21 +9,24 @@ build:
     entrypoint: [""]
   script:
     - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
     - >
-      echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}"
-      > /kaniko/.docker/config.json
-- >
     - /kaniko/executor --context $CI_PROJECT_DIR
+      --context $CI_PROJECT_DIR
       --use-new-run
       --snapshotMode=redo
-      --dockerfile $CI_PROJECT_DIR/Dockerfile
+      --cache=true
+      --cache-ttl=48h
+      --dockerfile $CI_PROJECT_DIR/docker/Dockerfile
       --destination $CI_REGISTRY_IMAGE/app:$CI_COMMIT_REF_NAME
-      --destination $CI_REGISTRY_IMAGE/app:latest
+      --build-arg packagerUsername=$PACKAGER_USERNAME
+      --build-arg packagerPassword=$PACKAGER_PASSWORD
+
 tags:
     - nnmini
   only:
     - master
- 
+    - /^v(\d+\.)?(\d+\.)?(\*|\d+).*$/
 
 
 deploy-production:

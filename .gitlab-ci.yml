@@ -36,9 +36,9 @@ deploy-production:
     - chmod 700 ~/.ssh
     - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
-    - rsync -vizaP -e "ssh -p $SSH_PORT" ./docker-compose.prod.yml $SSH_HOST:$PROD_DIR
+    - rsync -vizaP -e "ssh -p $SSH_PORT" ./docker-compose.yml $SSH_HOST:$PROD_DIR
     - ssh $PROD_SSH_CONNECTION -t "cd $PROD_DIR && mkdir -m 775 -p ./var/{runtime,uploads,mysql}"
-    - ssh $PROD_SSH_CONNECTION -t "cd $PROD_DIR && sed -i 's/:latest/:$CI_COMMIT_REF_NAME/g' docker-compose.prod.yml"
+    - ssh $PROD_SSH_CONNECTION -t "cd $PROD_DIR && sed -i 's/:latest/:$CI_COMMIT_REF_NAME/g' docker-compose.yml"
     - echo "$PROD_ENV_FILE" > "$(pwd)/prod.env"
     - rsync -vizaP -e "ssh -p $SSH_PORT" ./prod.env $SSH_HOST:$PROD_DIR
     - >

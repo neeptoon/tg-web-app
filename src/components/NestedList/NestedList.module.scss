@@ -61,6 +61,7 @@
     p {
         margin: 0;
         color: var(--primary-gray);
+        text-align: left;
     }
 
     &:hover {
@@ -69,5 +70,9 @@
         text-decoration-thickness: 1px;
         text-underline-offset: 2.9px;
         cursor: pointer;
+
+        p {
+            color: var(--primary-green);
+        }
     }
 }

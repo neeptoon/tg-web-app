@@ -45,7 +45,6 @@ export const Articlespage = () => {
             alignItems: 'center',
             padding: 0,
             maxWidth: '500px',
-            outline: '2px solid orange',
         }}>
             <section className={classes.articlesPage}>
                 {

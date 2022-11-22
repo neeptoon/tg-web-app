@@ -1,7 +1,7 @@
 import {instance} from './config';
 
-export class analitycService {
-    static async articleGet(source, target) {
+export class analyticService {
+    static async sendUserMove({source = null, target}) {
         await instance.put('/api/analytics/event/article.get/',
             {source, target}
         );

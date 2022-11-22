@@ -8,7 +8,6 @@ import {ERROR_MESSAGE} from '../../const';
 
 import classes from './Errorpage.module.scss';
 
-
 export const Errorpage = ({status}) => {
     const navigate = useNavigate();
     const location = useLocation();

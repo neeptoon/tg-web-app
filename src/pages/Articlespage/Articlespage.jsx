@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 
 import {useLocation} from 'react-router-dom';
 
+import {Container} from '@mui/material';
+
 import {NestedList} from '../../components/NestedList';
 import {ArticleService} from '../../services/article';
 import {useFetching} from '../../hooks/useFetching';
@@ -36,7 +38,15 @@ export const Articlespage = () => {
     };
 
     return (
-        <CustomContainer>
+        <Container sx={{
+            width: '90%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            padding: 0,
+            maxWidth: '500px',
+            outline: '2px solid orange',
+        }}>
             <section className={classes.articlesPage}>
                 {
                     isLoading
@@ -56,7 +66,7 @@ export const Articlespage = () => {
                 }
 
             </section>
-        </CustomContainer>
+        </Container>
 
     );
 };

@@ -21,11 +21,11 @@ build:
       --destination $CI_REGISTRY_IMAGE/app:$CI_COMMIT_REF_NAME
       --build-arg packagerUsername=$PACKAGER_USERNAME
       --build-arg packagerPassword=$PACKAGER_PASSWORD
-  tags:
-  - nn-mini
   only:
-  - master
-  - /^v(\d+\.)?(\d+\.)?(\*|\d+).*$/
+   - master
+   - /^v(\d+\.)?(\d+\.)?(\*|\d+).*$/
+  tags:
+   - nn-mini
 
 
 deploy-production:
@@ -50,9 +50,9 @@ deploy-production:
       && docker stack deploy --with-registry-auth --compose-file ./docker-compose.prod.yml --prune megafon_front"
   after_script:
     - rm -rf ~/.ssh
-environment:
+  environment:
     name: production
-only:
-  - master
-tags:
-  - nn-mini
+  only:
+    - master
+  tags:
+    - nn-mini

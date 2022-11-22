@@ -11,6 +11,9 @@ export const globalStyles = {
     '::-webkit-scrollbar': {
         'backgroundColor': 'var(--tg-theme-secondary-bg-color) !important',
     },
+    '::-webkit-scrollbar:hover': {
+        'backgroundColor': 'var(--tg-theme-secondary-bg-color) !important',
+    },
     'img': {
         'display': 'block',
         'maxWidth': '100%'

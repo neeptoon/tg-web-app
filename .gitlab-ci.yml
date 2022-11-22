@@ -39,8 +39,8 @@ deploy-production:
     - rsync -vizaP -e "ssh -p $PROD_SSH_PORT" ./docker-compose.yml $PROD_SSH_HOST:$PROD_DIR
     - ssh $PROD_SSH_CONNECTION -t "cd $PROD_DIR && mkdir -m 775 -p ./var/{runtime,uploads,mysql}"
     - ssh $PROD_SSH_CONNECTION -t "cd $PROD_DIR && sed -i 's/:latest/:$CI_COMMIT_REF_NAME/g' docker-compose.yml"
-    - echo "$PROD_ENV_FILE" > "$(pwd)/prod.env"
-    - rsync -vizaP -e "ssh -p $PROD_SSH_PORT" ./prod.env $SSH_HOST:$PROD_DIR
+    - echo "$PROD_ENV_FILE" > "$(pwd)/.env"
+    - rsync -vizaP -e "ssh -p $PROD_SSH_PORT" ./.env $SSH_HOST:$PROD_DIR
     - >
       ssh $PROD_SSH_CONNECTION -t "cd /var/www/app/front 
       && docker login -u$CI_REGISTRY_USER -p$CI_REGISTRY_PASSWORD https://gitlab-registry.convergent.digital

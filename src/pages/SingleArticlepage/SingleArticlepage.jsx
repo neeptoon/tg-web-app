@@ -7,16 +7,21 @@ import {ArticleService} from '../../services/article';
 import {Loader} from '../../components/UI/Loader';
 import {ToPageLink} from '../../components/UI/ToPageLink';
 import {analyticService} from '../../services/analytics';
-
 import {AppRoute, pathToPage} from '../../const';
 
+import {ReactComponent as IncreasedText} from '../../assets/images/incText.svg';
+import {ReactComponent as DecreasedText} from '../../assets/images/decText.svg';
+
 import classes from './SingleArticlepage.module.scss';
+
 
 export const SingleArticlepage = () => {
     const {id} = useParams();
     const [article, setArticle] = useState(null);
+    const [decreasedText, setDecreasedText] = useState(false);
     const location = useLocation();
     const target = useRef(null);
+    const page = useRef(null);
 
     const [fetchArticle, isLoading] = useFetching(async () => {
         const response = await ArticleService.getSingleArticle(id);
@@ -57,9 +62,16 @@ export const SingleArticlepage = () => {
         }
     }
 
+    function handleClick() {
+        setDecreasedText(!decreasedText);
+        decreasedText
+            ? page.current.style.setProperty('--article-font-size', '12px')
+            : page.current.style.setProperty('--article-font-size', '14px');
+    }
+
     return (
         <CustomContainer>
-            <section className={classes.page}>
+            <section className={classes.page} ref={page}>
                 {
                     isLoading
                         ? <Loader/>
@@ -72,6 +84,13 @@ export const SingleArticlepage = () => {
                                         <div className={classes.text} dangerouslySetInnerHTML={createMarkup()} />
                                     </div>
                                     <div ref={target} ></div>
+                                    <button
+                                        className={classes.button}
+                                        onClick={handleClick}
+                                    >
+                                        {decreasedText ? <IncreasedText/> : <DecreasedText/>}
+                                        <span className="visually-hidden">кнопка увеличения текста</span>
+                                    </button>
                                 </>
                             }
                         </>

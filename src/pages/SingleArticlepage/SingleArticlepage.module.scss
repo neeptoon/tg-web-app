@@ -1,10 +1,13 @@
 .page {
-    padding: 35px 0;
+    padding: 35px 0 60px;
+    font-size: var(--article-font-size, 12px);
+    position: relative;
+    transition: font-size 0.2s ease-out;
 }
 
 .heading {
     line-height: 1.1;
-    font-size: 30px;
+    font-size: 2.5em;
     color: var(--primary-violet);
     text-align: left;
 }
@@ -17,6 +20,7 @@
 .text {
     color: var(--primary-gray);
     font-weight: 400;
+    font-size: 1em;
 
     h1 {
         font-size: 1.5em !important;
@@ -31,7 +35,7 @@
 
     p {
         margin: 0 0 15px;
-        font-size: 12px;
+        font-size: 1em;
         line-height: 1.1;
         text-align: left;
         color: var(--primary-gray);
@@ -39,7 +43,7 @@
 
     ul, ol {
         margin: 0 0 12px;
-        font-size: 12px;
+        font-size: 1em;
         line-height: 1.1;
     }
 
@@ -48,14 +52,16 @@
     }
 
     blockquote {
-        font-size: 12px;
+        font-size: 1em;
         color: var(--primary-gray);
     }
 
     img {
+        display: block;
         margin: auto;
         width: 100% !important;
         height: auto !important;
+        max-width: 100% !important;
     }
 
     table {
@@ -66,7 +72,7 @@
         border-bottom: 2px solid #570F63;
         border-right: 2px solid #570F63;
         color: #570F63;
-        font-size: 8px;
+        font-size: 0.67em;
     }
 
     th {
@@ -84,6 +90,7 @@
         p {
             color: #570F63;
             margin: 0;
+            font-size: 0.67em;
         }
     }
 
@@ -105,6 +112,14 @@
     tr:nth-child(even) {
         background-color: #EAE1EB;
     }
+}
 
+.button {
+    position: fixed;
+    padding: 0;
+    right: 14px;
+    bottom: 3px;
+    border: none;
+    background-color: transparent;
 }
 

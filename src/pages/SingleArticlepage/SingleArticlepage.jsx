@@ -50,6 +50,7 @@ export const SingleArticlepage = () => {
 
     useEffect(() => {
         fetchArticle();
+
     }, [id]);
 
     if(article) {

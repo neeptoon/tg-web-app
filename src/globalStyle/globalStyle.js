@@ -7,8 +7,14 @@ export const globalStyles = {
         '--primary-green': '#00B944',
         '--secondary-violet': '#570F63',
         '--secondary-gray': '#E2E2E2',
+        // '--article-font-size': '12px',
+        'padding': '0 calc(8px - (100vw - 100%)) 0 0',
     },
     '::-webkit-scrollbar': {
+        'backgroundColor': 'var(--tg-theme-secondary-bg-color) !important',
+        'width': '8px !important'
+    },
+    '::-webkit-scrollbar:hover': {
         'backgroundColor': 'var(--tg-theme-secondary-bg-color) !important',
     },
     'img': {

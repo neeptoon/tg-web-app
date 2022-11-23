@@ -28,7 +28,7 @@ export const Finalpage = () => {
             <section className={classes.finalpage}>
                 <div className={classes.wrapper}>
                     <ToPageLink page={AppRoute.Quiz}/>
-                    <button className={classes.update} onClick={() => navigate(AppRoute.Quiz)}>
+                    <button className={classes.update} onClick={() => navigate(AppRoute.Quiz, {state: location.pathname})}>
                         Другой вопрос
                     </button>
                 </div>

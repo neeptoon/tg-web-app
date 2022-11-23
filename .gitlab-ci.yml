@@ -23,8 +23,7 @@ build:
    - master
    - /^v(\d+\.)?(\d+\.)?(\*|\d+).*$/
   tags:
-   - cmg-dev-pmi-nps
-
+   - nn-mini2
 
 deploy-production:
   stage: deploy
@@ -36,16 +35,10 @@ deploy-production:
     - chmod 700 ~/.ssh
     - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
-    - rsync -vizaP -e "ssh -p $PROD_SSH_PORT" ./docker-compose.yml $PROD_SSH_HOST:$PROD_DIR
-    - ssh $PROD_SSH_CONNECTION -t "cd $PROD_DIR && mkdir -m 775 -p ./var/{runtime,uploads,mysql}"
-    - ssh $PROD_SSH_CONNECTION -t "cd $PROD_DIR && sed -i 's/:latest/:$CI_COMMIT_REF_NAME/g' docker-compose.yml"
-    - echo "$PROD_ENV_FILE" > "$(pwd)/.env"
-    - rsync -vizaP -e "ssh -p $PROD_SSH_PORT" ./.env $PROD_SSH_HOST:$PROD_DIR
-    - >
-      ssh $PROD_SSH_CONNECTION -t "cd /var/www/app/front 
+    - ssh $PROD_SSH_CONNECTION -t "cd /var/www/app/back 
       && docker login -u$CI_REGISTRY_USER -p$CI_REGISTRY_PASSWORD https://gitlab-registry.convergent.digital
       && docker pull "$CI_REGISTRY_IMAGE"/app:"$CI_COMMIT_REF_NAME"
-      && docker stack deploy --with-registry-auth --compose-file ./docker-compose.yml --prune megafon_front"
+      && docker stack deploy --with-registry-auth --compose-file ./docker-compose.prod.yml --prune megafon_back"
   after_script:
     - rm -rf ~/.ssh
   environment:
@@ -53,4 +46,4 @@ deploy-production:
   only:
     - master
   tags:
-    - cmg-dev-pmi-nps
+    - nn-mini2

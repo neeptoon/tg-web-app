@@ -13,13 +13,10 @@ function valuetext(value) {
 }
 
 export function CustomSlider({onAnswer, question, fetchQuestion}) {
-    const {id, text, min, max, correct, article_id} = question;
-
+    const {min, max} = question;
     const initialState = Math.floor(Math.random() * (max - min) + min);
-
     const [sliderValue, setSliderValue] = useState(initialState);
-
-    const handleChange = (evt) => setSliderValue(Number(evt.target.value));
+    const handleChange = (evt) => setSliderValue(evt.target.value);
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
@@ -30,7 +27,7 @@ export function CustomSlider({onAnswer, question, fetchQuestion}) {
         <Box sx={{ width: '97%' }}>
             <Slider
                 aria-label="Custom marks"
-                value={sliderValue}
+                value={Number(sliderValue)}
                 getAriaValueText={valuetext}
                 valueLabelDisplay="on"
                 marks={getMarksSlider(min, max)}
@@ -64,11 +61,10 @@ export function CustomSlider({onAnswer, question, fetchQuestion}) {
             <form className={classes.sliderForm} onSubmit={handleSubmit}>
                 <input
                     type="number"
-                    min={min}
                     max={max}
                     className={classes.value}
                     name="answer"
-                    value={sliderValue > max ? max : sliderValue < min ? min : sliderValue}
+                    value={sliderValue > max ? max : sliderValue}
                     onChange={handleChange}
                 />
                 <button className={classes.sendButton} type="submit">Отправить</button>

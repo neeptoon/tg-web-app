@@ -65,7 +65,7 @@
   border-bottom: 2px solid #570F63;
   border-right: 2px solid #570F63;
   color: #570F63;
-  font-size: 0.67em;
+  font-size: 1em;
 }
 .text th {
   padding: 9px 7px;
@@ -81,7 +81,6 @@
 .text td p {
   color: #570F63;
   margin: 0;
-  font-weight: bold;
 }
 .text tr:nth-child(1) {
   padding: 9px 7px;
@@ -90,6 +89,7 @@
 }
 .text tr:nth-child(1) p {
   color: white;
+  font-weight: bold;
 }
 .text tr:nth-child(even) {
   background-color: #FFFFFF;

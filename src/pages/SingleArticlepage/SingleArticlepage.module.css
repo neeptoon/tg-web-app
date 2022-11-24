@@ -81,6 +81,7 @@
 .text td p {
   color: #570F63;
   margin: 0;
+  font-weight: bold;
 }
 .text tr:nth-child(1) {
   padding: 9px 7px;

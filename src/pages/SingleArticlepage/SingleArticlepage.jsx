@@ -54,7 +54,7 @@ export const SingleArticlepage = () => {
     }, [id]);
 
     if(article) {
-        analyticService.sendUserMove({source: pathToPage[location.state], target: article.name});
+        analyticService.sendUserMove({source: pathToPage[location.state] || pathToPage[AppRoute.Root], target: article.name});
     }
 
     function createMarkup() {

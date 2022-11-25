@@ -61,6 +61,7 @@ export function CustomSlider({onAnswer, question, fetchQuestion}) {
             <form className={classes.sliderForm} onSubmit={handleSubmit}>
                 <input
                     type="number"
+                    inputMode="numeric"
                     max={max}
                     className={classes.value}
                     name="answer"

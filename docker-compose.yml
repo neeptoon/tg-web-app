@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  front:
+    image: gitlab-registry.convergent.digital/megafon/megafon_webapp/app:master
+    restart: always
+    tty: true
+    ports:
+      - "8080:3000"
+    volumes:
+      - ./apps:/var/www/web
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 1
+        delay: 1m

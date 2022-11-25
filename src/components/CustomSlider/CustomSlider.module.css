@@ -16,6 +16,11 @@
 .sliderForm button:hover {
   cursor: pointer;
 }
+.sliderForm input[type=number] {
+  -moz-appearance: textfield;
+  -webkit-appearance: textfield;
+  appearance: textfield;
+}
 .sliderForm input[type=number]::-webkit-outer-spin-button,
 .sliderForm input[type=number]::-webkit-inner-spin-button {
   display: none;

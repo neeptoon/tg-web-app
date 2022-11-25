@@ -4,7 +4,7 @@ import {CustomContainer} from '../../components/UI/CustomContainer';
 import {PrimaryHeading} from '../../components/UI/PrimaryHeading';
 import Warning from '../../assets/images/warning.png';
 import {ReactComponent as BackArrow} from '../../assets/images/back-arrow.svg';
-import {ERROR_MESSAGE} from '../../const';
+import {AppRoute, ERROR_MESSAGE} from '../../const';
 
 import classes from './Errorpage.module.scss';
 
@@ -13,7 +13,7 @@ export const Errorpage = ({status}) => {
     const location = useLocation();
 
     const handleCLick = () => {
-        navigate('/');
+        navigate(AppRoute.Root);
     };
 
     return (

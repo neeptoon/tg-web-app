@@ -1,5 +1,7 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {Routes, Route, useNavigate} from 'react-router-dom';
+
+import {ErrorBoundary} from 'react-error-boundary';
 
 import {Homepage} from './pages/Hompage';
 import {Quizpage} from './pages/Quizpage';
@@ -10,6 +12,7 @@ import {SingleArticlepage} from './pages/SingleArticlepage';
 import {Finalpage} from './pages/Finalpage';
 import {AppRoute} from './const';
 import {AuthService} from './services/auth';
+import {ErrorFallback} from './components/ErrorFallback';
 
 
 function App() {
@@ -30,14 +33,16 @@ function App() {
 
     return (
         <>
-            <Routes>
-                <Route path={AppRoute.Root} element={<Homepage/>}/>
-                <Route path={AppRoute.Quiz} element={<Quizpage/>}/>
-                <Route path={AppRoute.Article} element={<Articlespage/>}/>
-                <Route path={AppRoute.SingleArticle} element={<SingleArticlepage/>}/>
-                <Route path={AppRoute.Error} element={<Errorpage status={404}/>}/>
-                <Route path={AppRoute.Final} element={<Finalpage/>}/>
-            </Routes>
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+                <Routes>
+                    <Route path={AppRoute.Root} element={<Homepage/>}/>
+                    <Route path={AppRoute.Quiz} element={<Quizpage/>}/>
+                    <Route path={AppRoute.Article} element={<Articlespage/>}/>
+                    <Route path={AppRoute.SingleArticle} element={<SingleArticlepage/>}/>
+                    <Route path={AppRoute.Error} element={<Errorpage status={404}/>}/>
+                    <Route path={AppRoute.Final} element={<Finalpage/>}/>
+                </Routes>
+            </ErrorBoundary>
         </>
     );
 }

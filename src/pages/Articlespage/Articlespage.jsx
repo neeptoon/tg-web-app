@@ -8,6 +8,7 @@ import {NestedList} from '../../components/NestedList';
 import {ArticleService} from '../../services/article';
 import {useFetching} from '../../hooks/useFetching';
 import {ToPageLink} from '../../components/UI/ToPageLink';
+import {CustomContainer} from '../../components/UI/CustomContainer';
 import {PrimaryHeading} from '../../components/UI/PrimaryHeading';
 import {Loader} from '../../components/UI/Loader';
 
@@ -26,13 +27,10 @@ export const Articlespage = () => {
         setArticlesList(response);
     });
 
+
     useEffect(() => {
         fetchArticles();
-        analyticService
-            .sendUserMove({
-                source: pathToPage[location.state] || location.state,
-                target: pathToPage[location.pathname]
-            });
+        analyticService.sendUserMove({source: pathToPage[location.state] || location.state, target: pathToPage[location.pathname]});
     }, []);
 
     const handleClick = () => {
@@ -62,13 +60,10 @@ export const Articlespage = () => {
                             <div className={classes.heading}>
                                 <PrimaryHeading>Статьи</PrimaryHeading>
                             </div>
-                            {articlesList && <NestedList
-                                list={articlesList}
-                                isExpanded={isExpanded}
-                                setExpanded={setExpanded}
-                            />}
+                            {articlesList && <NestedList list={articlesList} isExpanded={isExpanded}/>}
                         </>
                 }
+
             </section>
         </Container>
 

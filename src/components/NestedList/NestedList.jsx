@@ -10,7 +10,7 @@ import DefaultIcon from '../../assets/images/board-1.png';
 import classes from './NestedList.module.scss';
 
 
-export function NestedList({list, isExpanded}) {
+export function NestedList({list, isExpanded, setExpanded}) {
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -21,9 +21,11 @@ export function NestedList({list, isExpanded}) {
     
     const [openedItem, setOpenedItem] = useState(initOpenedItem);
 
-    const handleClick = (name) => {
-        setOpenedItem({...openedItem, ...{[name]: !openedItem[name]} });
-    };
+    useEffect(() => {
+        if (!Object.values(openedItem).includes(false)) {
+            setExpanded(true);
+        }
+    }, [openedItem]);
 
     useEffect(() => {
         const newOpenedItem = list.reduce((accum, current) => {
@@ -33,6 +35,11 @@ export function NestedList({list, isExpanded}) {
 
         setOpenedItem(newOpenedItem);
     }, [isExpanded]);
+
+
+    const handleClick = (name) => {
+        setOpenedItem({...openedItem, ...{[name]: !openedItem[name]} });
+    };
 
     return (
         <>

@@ -12,6 +12,8 @@ import {AppRoute, pathToPage} from '../../const';
 import {ReactComponent as IncreasedText} from '../../assets/images/incText.svg';
 import {ReactComponent as DecreasedText} from '../../assets/images/decText.svg';
 
+import {useElementOnScreen} from '../../hooks/useElementOnScreen';
+
 import classes from './SingleArticlepage.module.scss';
 
 
@@ -20,42 +22,40 @@ export const SingleArticlepage = () => {
     const [article, setArticle] = useState(null);
     const [decreasedText, setDecreasedText] = useState(false);
     const location = useLocation();
-    const target = useRef(null);
+    // const target = useRef(null);
     const page = useRef(null);
+
+    const [spyOfArticle, isVisibleSpyOfArticle] = useElementOnScreen({
+        root: null,
+        rootMargin: '80px'
+    });
 
     const [fetchArticle, isLoading] = useFetching(async () => {
         const response = await ArticleService.getSingleArticle(id);
         setArticle(response);
     });
 
-    const options = {
-        root: null,
-        rootMargin: '80px',
-    };
-
-    const callback = (entries, observer) => {
-        const [entry] = entries;
-        if(entry.isIntersecting) {
-            observer.unobserve(entry.target);
-            analyticService.articleRead(article.name, id);
-        }
-    };
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(callback, options);
-        if(target.current) {
-            observer.observe(target.current);
-        }
-    }, [target, options]);
-
     useEffect(() => {
         fetchArticle();
-
     }, [id]);
 
-    if(article) {
-        analyticService.sendUserMove({source: pathToPage[location.state] || pathToPage[AppRoute.Root], target: article.name});
-    }
+
+    useEffect(() => {
+        if(isVisibleSpyOfArticle) {
+            analyticService.articleRead(article?.name, id);
+        }
+
+    }, [isVisibleSpyOfArticle]);
+
+
+    useEffect(() => {
+        if(article) {
+            analyticService.sendUserMove({
+                source: pathToPage[location.state] || pathToPage[AppRoute.Root],
+                target: article.name
+            });
+        }
+    }, [article]);
 
     function createMarkup() {
         if (article) {
@@ -84,7 +84,7 @@ export const SingleArticlepage = () => {
                                     <div className={classes.content} >
                                         <div className={classes.text} dangerouslySetInnerHTML={createMarkup()} />
                                     </div>
-                                    <div ref={target} ></div>
+                                    <div ref={spyOfArticle} ></div>
                                     <button
                                         className={classes.button}
                                         onClick={handleClick}

@@ -1,0 +1,49 @@
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    - >
+    - /kaniko/executor --context $CI_PROJECT_DIR
+      --context $CI_PROJECT_DIR
+      --use-new-run
+      --snapshotMode=redo
+      --cache=true
+      --cache-ttl=48h
+      --dockerfile $CI_PROJECT_DIR/.docker/Dockerfile
+      --destination $CI_REGISTRY_IMAGE/app:$CI_COMMIT_REF_NAME
+  only:
+   - master
+   - /^v(\d+\.)?(\d+\.)?(\*|\d+).*$/
+  tags:
+   - nn-mini2
+
+deploy-production:
+  stage: deploy
+  before_script:
+    - apk add --update --no-cache openssh rsync sshpass
+    - eval $(ssh-agent -s)
+    - echo "$PROD_SSH_DEPLOY_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - 'echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+  script:
+    - ssh $PROD_SSH_CONNECTION -t "cd /var/www/app/back 
+      && docker login -u$CI_REGISTRY_USER -p$CI_REGISTRY_PASSWORD https://gitlab-registry.convergent.digital
+      && docker pull "$CI_REGISTRY_IMAGE"/app:"$CI_COMMIT_REF_NAME"
+      && docker stack deploy --with-registry-auth --compose-file ./docker-compose.prod.yml --prune megafon_back"
+  after_script:
+    - rm -rf ~/.ssh
+  environment:
+    name: production
+  only:
+    - master
+  tags:
+    - nn-mini2

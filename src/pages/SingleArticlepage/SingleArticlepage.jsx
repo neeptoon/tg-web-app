@@ -12,8 +12,6 @@ import {AppRoute, pathToPage} from '../../const';
 import {ReactComponent as IncreasedText} from '../../assets/images/incText.svg';
 import {ReactComponent as DecreasedText} from '../../assets/images/decText.svg';
 
-import {useElementOnScreen} from '../../hooks/useElementOnScreen';
-
 import classes from './SingleArticlepage.module.scss';
 
 
@@ -22,44 +20,42 @@ export const SingleArticlepage = () => {
     const [article, setArticle] = useState(null);
     const [decreasedText, setDecreasedText] = useState(false);
     const location = useLocation();
+    const target = useRef(null);
     const page = useRef(null);
-
-    const [spyOfArticle, isVisibleSpyOfArticle] = useElementOnScreen({
-        root: null,
-        rootMargin: '80px',
-        unobserve: true
-    });
-
-    const [spyOfArrow, isVisibleSpyOfArrow] = useElementOnScreen({
-        root: null,
-        rootMargin: '20px'
-    });
 
     const [fetchArticle, isLoading] = useFetching(async () => {
         const response = await ArticleService.getSingleArticle(id);
         setArticle(response);
     });
 
+    const options = {
+        root: null,
+        rootMargin: '80px',
+    };
+
+    const callback = (entries, observer) => {
+        const [entry] = entries;
+        if(entry.isIntersecting) {
+            observer.unobserve(entry.target);
+            analyticService.articleRead(article.name, id);
+        }
+    };
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(callback, options);
+        if(target.current) {
+            observer.observe(target.current);
+        }
+    }, [target, options]);
+
     useEffect(() => {
         fetchArticle();
+
     }, [id]);
 
-
-    useEffect(() => {
-        if(isVisibleSpyOfArticle) {
-            analyticService.articleRead(article?.name, id);
-        }
-
-    }, [isVisibleSpyOfArticle]);
-
-    useEffect(() => {
-        if(article) {
-            analyticService.sendUserMove({
-                source: pathToPage[location.state] || pathToPage[AppRoute.Root],
-                target: article.name
-            });
-        }
-    }, [article]);
+    if(article) {
+        analyticService.sendUserMove({source: pathToPage[location.state] || pathToPage[AppRoute.Root], target: article.name});
+    }
 
     function createMarkup() {
         if (article) {
@@ -84,12 +80,11 @@ export const SingleArticlepage = () => {
                             {article &&
                                 <>
                                     <ToPageLink page={AppRoute.Article} articleName={article.name}/>
-                                    <div ref={spyOfArrow}></div>
                                     <h2 className={classes.heading}>{article.name}</h2>
                                     <div className={classes.content} >
                                         <div className={classes.text} dangerouslySetInnerHTML={createMarkup()} />
                                     </div>
-                                    <div ref={spyOfArticle} ></div>
+                                    <div ref={target} ></div>
                                     <button
                                         className={classes.button}
                                         onClick={handleClick}
@@ -97,13 +92,6 @@ export const SingleArticlepage = () => {
                                         {decreasedText ? <IncreasedText/> : <DecreasedText/>}
                                         <span className="visually-hidden">кнопка увеличения текста</span>
                                     </button>
-                                    {!isVisibleSpyOfArrow &&
-                                        <div className={classes.downArrow}>
-                                            <ToPageLink
-                                                page={AppRoute.Article}
-                                                articleName={article.name}
-                                            />
-                                        </div>}
                                 </>
                             }
                         </>

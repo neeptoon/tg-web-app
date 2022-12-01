@@ -3,19 +3,15 @@
   font-size: 14px;
   line-height: 1.1;
   border-radius: 20px;
-  animation-name: shine;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-  animation-timing-function: ease-in;
-  transition: filter 0.5s;
+  box-shadow: 0 0 8px 3px rgba(0, 185, 68, 0.1);
+  transition: box-shadow 0.3s;
 }
 .item > * {
   text-decoration: none;
   color: #455154;
 }
 .item:hover {
-  filter: drop-shadow(0 0 25px rgba(0, 185, 68, 0.9));
+  box-shadow: 0 0 17px 3px rgba(0, 185, 68, 0.4);
 }
 
 .link {
@@ -29,15 +25,6 @@
 .arrow {
   flex-shrink: 0;
   width: 13px;
-}
-
-@keyframes shine {
-  from {
-    box-shadow: 0 0 8px 3px rgba(0, 185, 68, 0.1);
-  }
-  to {
-    box-shadow: 0 0 17px 3px rgba(0, 185, 68, 0.4);
-  }
 }
 
 /*# sourceMappingURL=ActivityItem.module.css.map */

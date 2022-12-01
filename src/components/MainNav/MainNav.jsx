@@ -34,7 +34,7 @@ export const MainNav = () => {
                 </li>
             </ul>
 
-            <p className={classes.info}>* — Это фановая история, которая вас ни к чему не <br/> принуждает</p>
+            <p className={classes.info}>* — Это фановая история, которая вас ни к чему не принуждает</p>
 
 
         </nav>

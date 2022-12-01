@@ -68,5 +68,8 @@
 .item:hover p {
   color: var(--primary-green);
 }
+.item .read {
+  color: var(--primary-green);
+}
 
 /*# sourceMappingURL=NestedList.module.css.map */

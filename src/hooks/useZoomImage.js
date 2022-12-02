@@ -14,14 +14,14 @@ export const useZoomImage = () => {
 
             if (box) {
                 const zoomImg = box.querySelector('img');
-                box.addEventListener('mousemove', (evt) => {
+                box.addEventListener('pointermove', (evt) => {
                     const x = evt.clientX - evt.target.offsetLeft;
                     const y = evt.clientY - evt.target.offsetTop;
 
                     zoomImg.style.transformOrigin = `${x}px ${y}px`;
                 });
 
-                box.addEventListener('mouseleave', () => {
+                box.addEventListener('pointerleave', () => {
                     zoomImg.style.transformOrigin = 'center';
                 });
             }

@@ -5,11 +5,32 @@ export const useZoomImage = () => {
     const [isModalOpen, setModalOpen] = useState(false);
 
     const allImages = Array.from(document.querySelectorAll('img'));
+
     allImages
         .forEach(img => img.addEventListener('click', () => {
             setCurrentImage(img.getAttribute('src'));
             setModalOpen(true);
+            const box = document.querySelector('#box');
+
+            if (box) {
+                const zoomImg = box.querySelector('img');
+                box.addEventListener('mousemove', (evt) => {
+                    const x = evt.clientX - evt.target.offsetLeft;
+                    const y = evt.clientY - evt.target.offsetTop;
+
+                    zoomImg.style.transformOrigin = `${x}px ${y}px`;
+                    zoomImg.style.transform = 'scale(1.5)';
+                    zoomImg.style.transition = 'transform, 0.1s';
+
+                });
+
+                box.addEventListener('mouseleave', () => {
+                    zoomImg.style.transformOrigin = 'center';
+                    zoomImg.style.transform = 'scale(1)';
+                });
+            }
         }));
+    
 
     return [currentImage, isModalOpen, setModalOpen];
 };

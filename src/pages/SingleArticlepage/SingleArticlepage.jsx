@@ -14,6 +14,8 @@ import {ReactComponent as DecreasedText} from '../../assets/images/decText.svg';
 
 import {useElementOnScreen} from '../../hooks/useElementOnScreen';
 
+import {useZoomImage} from '../../hooks/useZoomImage';
+
 import classes from './SingleArticlepage.module.scss';
 
 
@@ -23,6 +25,7 @@ export const SingleArticlepage = () => {
     const [decreasedText, setDecreasedText] = useState(false);
     const location = useLocation();
     const page = useRef(null);
+    const [selectedImage] = useZoomImage();
 
     const [spyOfArticle, isVisibleSpyOfArticle] = useElementOnScreen({
         root: null,
@@ -44,7 +47,6 @@ export const SingleArticlepage = () => {
         fetchArticle();
     }, [id]);
 
-
     useEffect(() => {
         if(isVisibleSpyOfArticle) {
             analyticService.articleRead(article?.name, id);
@@ -60,6 +62,12 @@ export const SingleArticlepage = () => {
             });
         }
     }, [article]);
+
+    useEffect(() => {
+        if(selectedImage) {
+            console.log(selectedImage);
+        }
+    }, [selectedImage]);
 
     function createMarkup() {
         if (article) {

@@ -27,7 +27,7 @@ export const SingleArticlepage = () => {
     const [decreasedText, setDecreasedText] = useState(false);
     const location = useLocation();
     const page = useRef(null);
-    const [selectedImage] = useZoomImage();
+    const [selectedImage, isModalOpen, setModalOpen] = useZoomImage();
 
     const [spyOfArticle, isVisibleSpyOfArticle] = useElementOnScreen({
         root: null,
@@ -65,12 +65,6 @@ export const SingleArticlepage = () => {
         }
     }, [article]);
 
-    useEffect(() => {
-        if(selectedImage) {
-            console.log(selectedImage);
-        }
-    }, [selectedImage]);
-
     function createMarkup() {
         if (article) {
             return {__html: article.content};
@@ -96,7 +90,6 @@ export const SingleArticlepage = () => {
                                     <ToPageLink page={AppRoute.Article} articleName={article.name}/>
                                     <div ref={spyOfArrow}></div>
                                     <h2 className={classes.heading}>{article.name}</h2>
-                                    <ZoomImageModal/>
                                     <div className={classes.content} >
                                         <div className={classes.text} dangerouslySetInnerHTML={createMarkup()} />
                                     </div>
@@ -108,6 +101,8 @@ export const SingleArticlepage = () => {
                                         {decreasedText ? <IncreasedText/> : <DecreasedText/>}
                                         <span className="visually-hidden">кнопка увеличения текста</span>
                                     </button>
+
+                                    {/*add arrow if aritcle is too long*/}
                                     {!isVisibleSpyOfArrow &&
                                         <div className={classes.downArrow}>
                                             <ToPageLink
@@ -115,6 +110,15 @@ export const SingleArticlepage = () => {
                                                 articleName={article.name}
                                             />
                                         </div>
+                                    }
+
+                                    {/*add modal by click on image*/}
+                                    {selectedImage
+                                        && <ZoomImageModal
+                                            image={selectedImage}
+                                            open={isModalOpen}
+                                            setModalOpen={setModalOpen}
+                                        />
                                     }
                                 </>
                             }

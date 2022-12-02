@@ -16,6 +16,8 @@ import {useElementOnScreen} from '../../hooks/useElementOnScreen';
 
 import {useZoomImage} from '../../hooks/useZoomImage';
 
+import {ZoomImageModal} from '../../components/ZoomImageModal';
+
 import classes from './SingleArticlepage.module.scss';
 
 
@@ -94,6 +96,7 @@ export const SingleArticlepage = () => {
                                     <ToPageLink page={AppRoute.Article} articleName={article.name}/>
                                     <div ref={spyOfArrow}></div>
                                     <h2 className={classes.heading}>{article.name}</h2>
+                                    <ZoomImageModal/>
                                     <div className={classes.content} >
                                         <div className={classes.text} dangerouslySetInnerHTML={createMarkup()} />
                                     </div>
@@ -111,7 +114,8 @@ export const SingleArticlepage = () => {
                                                 page={AppRoute.Article}
                                                 articleName={article.name}
                                             />
-                                        </div>}
+                                        </div>
+                                    }
                                 </>
                             }
                         </>

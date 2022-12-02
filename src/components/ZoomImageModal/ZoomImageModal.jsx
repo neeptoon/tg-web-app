@@ -34,7 +34,11 @@ export const ZoomImageModal = ({image, open, setModalOpen}) => {
                 aria-describedby="modal-modal-description"
             >
                 <Box id="box" sx={style}>
-                    <img src={image} alt="" style={{width: '100%', height: '100%', objectFit: 'cover', transformOrigin: 'center'}}/>
+                    <img src={image} alt="изображение к статье" style={{width: '100%',
+                        height: '100%',
+                        objectFit: 'cover',
+                        transformOrigin: 'center',
+                        transform: 'scale(1.7)' }}/>
 
                 </Box>
             </Modal>

@@ -19,12 +19,10 @@ export const useZoomImage = () => {
                     const y = evt.clientY - evt.target.offsetTop;
 
                     zoomImg.style.transformOrigin = `${x}px ${y}px`;
-                    zoomImg.style.transform = 'scale(1.5)';
                 });
 
                 box.addEventListener('mouseleave', () => {
                     zoomImg.style.transformOrigin = 'center';
-                    zoomImg.style.transform = 'scale(1)';
                 });
             }
         }));

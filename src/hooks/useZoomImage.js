@@ -20,7 +20,6 @@ export const useZoomImage = () => {
 
                     zoomImg.style.transformOrigin = `${x}px ${y}px`;
                     zoomImg.style.transform = 'scale(1.5)';
-                    zoomImg.style.transition = 'transform, 0.1s';
 
                 });
 

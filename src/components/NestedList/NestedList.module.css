@@ -55,7 +55,7 @@
 }
 .item p {
   margin: 0;
-  color: var(--primary-gray);
+  color: var(--primary-green);
   text-align: left;
 }
 .item:hover {
@@ -67,6 +67,9 @@
 }
 .item:hover p {
   color: var(--primary-green);
+}
+.item .read {
+  color: var(--primary-gray);
 }
 
 /*# sourceMappingURL=NestedList.module.css.map */

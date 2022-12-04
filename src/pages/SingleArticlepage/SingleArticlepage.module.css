@@ -57,6 +57,9 @@
   height: auto !important;
   max-width: 100% !important;
 }
+.text img:hover {
+  cursor: pointer;
+}
 .text table {
   margin-bottom: 15px;
   width: 100%;
@@ -105,6 +108,12 @@
   bottom: 3px;
   border: none;
   background-color: transparent;
+}
+
+.downArrow {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
 }
 
 /*# sourceMappingURL=SingleArticlepage.module.css.map */

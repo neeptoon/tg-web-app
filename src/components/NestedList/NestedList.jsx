@@ -46,6 +46,7 @@ export function NestedList({list, isExpanded, setExpanded}) {
         <>
             {list.map((item) => {
                 const {name, icon, articles} = item;
+                
                 return (
                     <List key={name} component="div" sx={{
                         padding: '0 0 8px 0',
@@ -59,14 +60,17 @@ export function NestedList({list, isExpanded, setExpanded}) {
 
                         <Collapse in={Boolean(openedItem[name])} timeout="auto" unmountOnExit >
                             {articles.map(item => {
-                                const {id, name} = item;
+                                const {id, name, read} = item;
+                                const rootClass = [];
+                                if(read) rootClass.push(classes.read);
+
                                 return (
                                     <List key={id} component="div" sx={{padding: 0}}>
                                         <button
                                             className={classes.item}
                                             onClick={() => navigate(`/article/${id}`, {state: location.pathname})}
                                         >
-                                            <p>{name}</p>
+                                            <p className={rootClass}>{name}</p>
                                             <Arrow className={classes.secondIcon}/>
                                         </button>
                                     </List>

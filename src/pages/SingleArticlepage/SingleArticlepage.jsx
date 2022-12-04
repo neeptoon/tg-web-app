@@ -14,6 +14,10 @@ import {ReactComponent as DecreasedText} from '../../assets/images/decText.svg';
 
 import {useElementOnScreen} from '../../hooks/useElementOnScreen';
 
+import {useZoomImage} from '../../hooks/useZoomImage';
+
+import {ZoomImageModal} from '../../components/ZoomImageModal';
+
 import classes from './SingleArticlepage.module.scss';
 
 
@@ -22,12 +26,18 @@ export const SingleArticlepage = () => {
     const [article, setArticle] = useState(null);
     const [decreasedText, setDecreasedText] = useState(false);
     const location = useLocation();
-    // const target = useRef(null);
     const page = useRef(null);
+
 
     const [spyOfArticle, isVisibleSpyOfArticle] = useElementOnScreen({
         root: null,
-        rootMargin: '80px'
+        rootMargin: '80px',
+        unobserve: true
+    });
+
+    const [spyOfArrow, isVisibleSpyOfArrow] = useElementOnScreen({
+        root: null,
+        rootMargin: '20px'
     });
 
     const [fetchArticle, isLoading] = useFetching(async () => {
@@ -39,14 +49,12 @@ export const SingleArticlepage = () => {
         fetchArticle();
     }, [id]);
 
-
     useEffect(() => {
         if(isVisibleSpyOfArticle) {
             analyticService.articleRead(article?.name, id);
         }
 
     }, [isVisibleSpyOfArticle]);
-
 
     useEffect(() => {
         if(article) {
@@ -80,8 +88,9 @@ export const SingleArticlepage = () => {
                             {article &&
                                 <>
                                     <ToPageLink page={AppRoute.Article} articleName={article.name}/>
+                                    <div ref={spyOfArrow}></div>
                                     <h2 className={classes.heading}>{article.name}</h2>
-                                    <div className={classes.content} >
+                                    <div id="content" className={classes.content} >
                                         <div className={classes.text} dangerouslySetInnerHTML={createMarkup()} />
                                     </div>
                                     <div ref={spyOfArticle} ></div>
@@ -92,6 +101,19 @@ export const SingleArticlepage = () => {
                                         {decreasedText ? <IncreasedText/> : <DecreasedText/>}
                                         <span className="visually-hidden">кнопка увеличения текста</span>
                                     </button>
+
+                                    {/*add arrow if aritcle is too long*/}
+                                    {!isVisibleSpyOfArrow &&
+                                        <div className={classes.downArrow}>
+                                            <ToPageLink
+                                                page={AppRoute.Article}
+                                                articleName={article.name}
+                                            />
+                                        </div>
+                                    }
+
+                                    {/*add modal by click on image*/}
+                                    <ZoomImageModal/>
                                 </>
                             }
                         </>

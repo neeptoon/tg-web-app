@@ -63,6 +63,10 @@
         width: 100% !important;
         height: auto !important;
         max-width: 100% !important;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     table {
@@ -121,5 +125,11 @@
     bottom: 3px;
     border: none;
     background-color: transparent;
+}
+
+.downArrow {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
 }
 

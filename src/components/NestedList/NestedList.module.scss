@@ -60,7 +60,7 @@
 
     p {
         margin: 0;
-        color: var(--primary-gray);
+        color: var(--primary-green);
         text-align: left;
     }
 
@@ -74,5 +74,9 @@
         p {
             color: var(--primary-green);
         }
+    }
+
+    .read {
+        color: var(--primary-gray);
     }
 }

@@ -1,45 +1,51 @@
-import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 
-import {getClientWidth} from '../../helpers';
-const clientWidth = getClientWidth();
+import Box from '@mui/material/Box';
+import {useGesture} from '@use-gesture/react';
+import {useState} from 'react';
 
-const MODAL_WIDTH = clientWidth * 0.8;
-const MODAL_HEIGHT = MODAL_WIDTH * 1.2;
 
-const style = {
-    display: 'flex',
-    justifyContent: 'center',
-    position: 'absolute',
-    padding: 0,
-    outline: 'none',
-    border: 'none',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: MODAL_WIDTH,
-    height: MODAL_HEIGHT,
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    overflow: 'hidden',
-};
+import classes from './ZoomImageModal.module.scss';
 
-export const ZoomImageModal = ({image, open, setModalOpen}) => {
+export const ZoomImageModal = ({image, open, setModalOpen, imageSize}) => {
+    const [crop, setCrop] = useState({x: 0, y: 0, scale: 1.5});
+    const bind = useGesture({
+        onDrag: ({offset: [dx, dy], target}) => {
+            target.ondragstart = () => false;
+            setCrop({...crop, x: dx, y: dy});
+        },
+    }, {
+        eventOptions: {
+            passive: false,
+        }
+    });
     return (
         <div>
             <Modal
                 open={open}
-                onClose={() => setModalOpen(false)}
+                onClose={() => {
+                    setModalOpen(false);
+                    setCrop({...crop, x: 0, y: 0});
+                }}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
-                <Box id="box" sx={style}>
-                    <img src={image} alt="изображение к статье" style={{width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        transformOrigin: 'center',
-                        transform: 'scale(1.7)' }}/>
 
+                <Box id="box" className={classes.box} sx={{
+                    width: `${imageSize.width * 1.1 }px`,
+                    height: `${imageSize.height * 1.1}px`
+                }}>
+                    <img
+                        src={image}
+                        className={classes.image}
+                        {...bind()}
+                        alt="изображение"
+                        style={{
+                            left: crop.x,
+                            top: crop.y,
+                            transform: `scale(${crop.scale})`,
+                            touchAction: 'none'
+                        }}/>
                 </Box>
             </Modal>
         </div>

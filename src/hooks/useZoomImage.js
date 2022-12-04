@@ -1,32 +1,23 @@
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 
 export const useZoomImage = () => {
     const [currentImage, setCurrentImage] = useState(null);
     const [isModalOpen, setModalOpen] = useState(false);
+    const [imageSize, setImageSize] = useState({width: 0, height: 0});
 
     const allImages = Array.from(document.querySelectorAll('img'));
 
-    allImages
-        .forEach(img => img.addEventListener('click', () => {
-            setCurrentImage(img.getAttribute('src'));
-            setModalOpen(true);
-            const box = document.querySelector('#box');
+    const clickHandler = useCallback((evt) => {
+        const image = evt.target;
+        const computedStyle = getComputedStyle(image);
+        setCurrentImage(image.getAttribute('src'));
+        setModalOpen(true);
+        setImageSize({width: parseInt(computedStyle.width), height: parseInt(computedStyle.height)});
+    }, []);
 
-            if (box) {
-                const zoomImg = box.querySelector('img');
-                box.addEventListener('pointermove', (evt) => {
-                    const x = evt.clientX - evt.target.offsetLeft;
-                    const y = evt.clientY - evt.target.offsetTop;
 
-                    zoomImg.style.transformOrigin = `${x}px ${y}px`;
-                });
-
-                box.addEventListener('pointerleave', () => {
-                    zoomImg.style.transformOrigin = 'center';
-                });
-            }
-        }));
+    allImages.forEach(img => img.addEventListener('click', clickHandler));
     
 
-    return [currentImage, isModalOpen, setModalOpen];
+    return [currentImage, isModalOpen, setModalOpen, imageSize];
 };

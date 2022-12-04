@@ -10,20 +10,22 @@ import classes from './ZoomImageModal.module.scss';
 
 export const ZoomImageModal = () => {
     const [image, isModalOpen, setModalOpen, imageSize] = useZoomImage();
-    const [crop, setCrop] = useState({x: 0, y: 0, scale: 1.5});
+    const [crop, setCrop] = useState({x: 0, y: 0});
     const bind = useGesture({
         onDrag: ({offset: [dx, dy], target}) => {
             target.ondragstart = () => false;
-            setCrop({...crop, x: dx, y: dy});
+            setCrop((crop) => ({...crop, x: dx, y: dy}));
         },
     }, {
         eventOptions: {
             passive: false,
+        },
+        drag: {
+            from: () => [0, 0]
         }
     });
 
     if (!image) return null;
-
 
     return (
         <div>
@@ -31,7 +33,7 @@ export const ZoomImageModal = () => {
                 open={isModalOpen}
                 onClose={() => {
                     setModalOpen(false);
-                    setCrop({scale: 1.5, x: 0, y: 0});
+                    setCrop((crop) => ({...crop, x: 0, y: 0}));
                 }}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
@@ -49,7 +51,6 @@ export const ZoomImageModal = () => {
                         style={{
                             left: crop.x,
                             top: crop.y,
-                            transform: 'scale(1.5)',
                             touchAction: 'none'
                         }}/>
                 </Box>

@@ -4,8 +4,12 @@ export const useZoomImage = () => {
     const [currentImage, setCurrentImage] = useState(null);
     const [isModalOpen, setModalOpen] = useState(false);
     const [imageSize, setImageSize] = useState({width: 0, height: 0});
+    const articleContent = document.querySelector('#content');
+    let allImages = [];
 
-    const allImages = Array.from(document.querySelectorAll('img'));
+    if (articleContent) {
+        allImages = Array.from(articleContent.querySelectorAll('img'));
+    }
 
     const clickHandler = useCallback((evt) => {
         const image = evt.target;

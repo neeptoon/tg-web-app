@@ -4,10 +4,12 @@ import Box from '@mui/material/Box';
 import {useGesture} from '@use-gesture/react';
 import {useState} from 'react';
 
+import {useZoomImage} from '../../hooks/useZoomImage';
 
 import classes from './ZoomImageModal.module.scss';
 
-export const ZoomImageModal = ({image, open, setModalOpen, imageSize}) => {
+export const ZoomImageModal = () => {
+    const [image, isModalOpen, setModalOpen, imageSize] = useZoomImage();
     const [crop, setCrop] = useState({x: 0, y: 0, scale: 1.5});
     const bind = useGesture({
         onDrag: ({offset: [dx, dy], target}) => {
@@ -19,13 +21,17 @@ export const ZoomImageModal = ({image, open, setModalOpen, imageSize}) => {
             passive: false,
         }
     });
+
+    if (!image) return null;
+
+
     return (
         <div>
             <Modal
-                open={open}
+                open={isModalOpen}
                 onClose={() => {
                     setModalOpen(false);
-                    setCrop({...crop, x: 0, y: 0});
+                    setCrop({scale: 1.5, x: 0, y: 0});
                 }}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
@@ -43,7 +49,7 @@ export const ZoomImageModal = ({image, open, setModalOpen, imageSize}) => {
                         style={{
                             left: crop.x,
                             top: crop.y,
-                            transform: `scale(${crop.scale})`,
+                            transform: 'scale(1.5)',
                             touchAction: 'none'
                         }}/>
                 </Box>

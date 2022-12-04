@@ -27,7 +27,8 @@ export const SingleArticlepage = () => {
     const [decreasedText, setDecreasedText] = useState(false);
     const location = useLocation();
     const page = useRef(null);
-    const [selectedImage, isModalOpen, setModalOpen, imageSize] = useZoomImage();
+
+
     const [spyOfArticle, isVisibleSpyOfArticle] = useElementOnScreen({
         root: null,
         rootMargin: '80px',
@@ -89,7 +90,7 @@ export const SingleArticlepage = () => {
                                     <ToPageLink page={AppRoute.Article} articleName={article.name}/>
                                     <div ref={spyOfArrow}></div>
                                     <h2 className={classes.heading}>{article.name}</h2>
-                                    <div className={classes.content} >
+                                    <div id="content" className={classes.content} >
                                         <div className={classes.text} dangerouslySetInnerHTML={createMarkup()} />
                                     </div>
                                     <div ref={spyOfArticle} ></div>
@@ -112,14 +113,7 @@ export const SingleArticlepage = () => {
                                     }
 
                                     {/*add modal by click on image*/}
-                                    {selectedImage
-                                        && <ZoomImageModal
-                                            image={selectedImage}
-                                            open={isModalOpen}
-                                            setModalOpen={setModalOpen}
-                                            imageSize={imageSize}
-                                        />
-                                    }
+                                    <ZoomImageModal/>
                                 </>
                             }
                         </>

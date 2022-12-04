@@ -27,8 +27,7 @@ export const SingleArticlepage = () => {
     const [decreasedText, setDecreasedText] = useState(false);
     const location = useLocation();
     const page = useRef(null);
-    const [selectedImage, isModalOpen, setModalOpen] = useZoomImage();
-
+    const [selectedImage, isModalOpen, setModalOpen, imageSize] = useZoomImage();
     const [spyOfArticle, isVisibleSpyOfArticle] = useElementOnScreen({
         root: null,
         rootMargin: '80px',
@@ -118,6 +117,7 @@ export const SingleArticlepage = () => {
                                             image={selectedImage}
                                             open={isModalOpen}
                                             setModalOpen={setModalOpen}
+                                            imageSize={imageSize}
                                         />
                                     }
                                 </>

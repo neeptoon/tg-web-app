@@ -1,4 +1,4 @@
-import {useLocation, useParams} from 'react-router-dom';
+import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import {useEffect, useRef, useState} from 'react';
 
 import {CustomContainer} from '../../components/UI/CustomContainer';
@@ -8,14 +8,9 @@ import {Loader} from '../../components/UI/Loader';
 import {ToPageLink} from '../../components/UI/ToPageLink';
 import {analyticService} from '../../services/analytics';
 import {AppRoute, pathToPage} from '../../const';
-
 import {ReactComponent as IncreasedText} from '../../assets/images/incText.svg';
 import {ReactComponent as DecreasedText} from '../../assets/images/decText.svg';
-
 import {useElementOnScreen} from '../../hooks/useElementOnScreen';
-
-import {useZoomImage} from '../../hooks/useZoomImage';
-
 import {ZoomImageModal} from '../../components/ZoomImageModal';
 
 import classes from './SingleArticlepage.module.scss';
@@ -26,6 +21,7 @@ export const SingleArticlepage = () => {
     const [article, setArticle] = useState(null);
     const [decreasedText, setDecreasedText] = useState(false);
     const location = useLocation();
+    const navigate = useNavigate();
     const page = useRef(null);
 
 
@@ -93,9 +89,16 @@ export const SingleArticlepage = () => {
                                     <div id="content" className={classes.content} >
                                         <div className={classes.text} dangerouslySetInnerHTML={createMarkup()} />
                                     </div>
-                                    <div ref={spyOfArticle} ></div>
+                                    {article.next_id &&
+                                        <button
+                                            className={classes.nextArticle}
+                                            onClick={() => navigate(`/article/${article.next_id}`, {state: location.pathname})}
+                                        >изучить следующую статью
+                                        </button>
+                                    }
+                                    <div ref={spyOfArticle}></div>
                                     <button
-                                        className={classes.button}
+                                        className={classes.textDecreaseButton}
                                         onClick={handleClick}
                                     >
                                         {decreasedText ? <IncreasedText/> : <DecreasedText/>}

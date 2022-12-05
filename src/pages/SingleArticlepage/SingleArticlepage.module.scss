@@ -1,5 +1,5 @@
 .page {
-    padding: 35px 0 60px;
+    padding: 35px 0 70px;
     font-size: var(--article-font-size, 12px);
     position: relative;
     transition: font-size 0.2s ease-out;
@@ -118,10 +118,10 @@
     }
 }
 
-.button {
+.textDecreaseButton {
     position: fixed;
     padding: 0;
-    right: 14px;
+    left: 80vw;
     bottom: 3px;
     border: none;
     background-color: transparent;
@@ -131,5 +131,23 @@
     position: absolute;
     bottom: 30px;
     left: 0;
+}
+
+.nextArticle {
+    padding: 0;
+    color: var(--primary-violet);
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2.9px;
+    background-color: transparent;
+    border: none;
+
+    &:hover {
+        cursor: pointer;
+    }
+
 }
 

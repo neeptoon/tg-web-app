@@ -28,14 +28,12 @@ export const MainNav = () => {
                         className={[classes.link, classes['link--intuition']].join(' ')}
                         onClick={() => navigate(AppRoute.Quiz, {state: location.pathname})}
                     >
-                        Проверь интуицию
+                        Проверь интуицию*
                         <Arrow className={classes.arrow}/>
                     </button>
-
                 </li>
             </ul>
-
-
+            <p className={classes.info}>* — Это фановая история, которая вас ни к чему не принуждает</p>
         </nav>
     );
 };

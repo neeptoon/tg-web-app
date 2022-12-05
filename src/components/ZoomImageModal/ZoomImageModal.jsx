@@ -14,7 +14,7 @@ export const ZoomImageModal = () => {
     const bind = useGesture({
         onDrag: ({offset: [dx, dy], target}) => {
             target.ondragstart = () => false;
-            setCrop((crop) => ({...crop, x: dx, y: dy}));
+            setCrop({x: dx, y: dy});
         },
     }, {
         eventOptions: {
@@ -33,7 +33,6 @@ export const ZoomImageModal = () => {
                 open={isModalOpen}
                 onClose={() => {
                     setModalOpen(false);
-                    setCrop((crop) => ({...crop, x: 0, y: 0}));
                 }}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"

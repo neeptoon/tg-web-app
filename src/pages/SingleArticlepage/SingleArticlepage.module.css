@@ -38,6 +38,11 @@
   text-align: left;
   color: var(--primary-gray);
 }
+.text iframe {
+  width: 100%;
+  height: unset;
+  aspect-ratio: 1.77;
+}
 .text ul, .text ol {
   margin: 0 0 12px;
   font-size: 1em;

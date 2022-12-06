@@ -7,26 +7,34 @@ import {ReactComponent as ExpandLess} from '../../assets/images/right-arrow.svg'
 import {ReactComponent as Arrow} from '../../assets/images/to-article-arrow.svg';
 import DefaultIcon from '../../assets/images/board-1.png';
 
+import {useLocalStorage} from '../../hooks/useLocalStorage';
+
 import classes from './NestedList.module.scss';
+
+const setDefaultValue = (initValue) => {
+    const list = localStorage.getItem('currentOpenedItems');
+    return list ? list : initValue;
+
+};
 
 export function NestedList({list, isExpanded, setExpanded}) {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const initOpenedItem = list.reduce((accum, current) => {
+    const initOpenedItems = list.reduce((accum, current) => {
         accum[current.name] = false;
         return accum;
     }, {});
-    
-    const [openedItem, setOpenedItem] = useState(initOpenedItem);
+
+    const [currentOpenedItems, setCurrentOpendedItems] = useLocalStorage(setDefaultValue(initOpenedItems), 'currentOpenedItems');
 
     useEffect(() => {
-        if (!Object.values(openedItem).includes(false)) {
+        if (!Object.values(currentOpenedItems).includes(false)) {
             setExpanded(true);
-        } else if (Object.values(openedItem).indexOf(true) === -1) {
+        } else if (Object.values(currentOpenedItems).indexOf(true) === -1) {
             setExpanded(false);
         }
-    }, [openedItem]);
+    }, [currentOpenedItems]);
 
     useEffect(() => {
         const newOpenedItem = list.reduce((accum, current) => {
@@ -34,12 +42,12 @@ export function NestedList({list, isExpanded, setExpanded}) {
             return accum;
         }, {});
 
-        setOpenedItem(newOpenedItem);
+        setCurrentOpendedItems(newOpenedItem);
     }, [isExpanded]);
 
 
     const handleClick = (name) => {
-        setOpenedItem({...openedItem, ...{[name]: !openedItem[name]} });
+        setCurrentOpendedItems({...currentOpenedItems, ...{[name]: !currentOpenedItems[name]} });
     };
 
     return (
@@ -55,10 +63,10 @@ export function NestedList({list, isExpanded, setExpanded}) {
                         <p className={classes.category} onClick={() => handleClick(name)}>
                             <img src={icon || DefaultIcon} alt="декоративное изображение иконки категории статей"/>
                             {name}
-                            {!openedItem[name] ? <ExpandLess className={classes.mainIcon} /> : <ExpandLess className={[classes.mainIcon, classes['mainIcon--open']].join(' ')}/>}
+                            {!currentOpenedItems[name] ? <ExpandLess className={classes.mainIcon} /> : <ExpandLess className={[classes.mainIcon, classes['mainIcon--open']].join(' ')}/>}
                         </p>
 
-                        <Collapse in={Boolean(openedItem[name])} timeout="auto" unmountOnExit >
+                        <Collapse in={Boolean(currentOpenedItems[name])} timeout="auto" unmountOnExit >
                             {articles.map(item => {
                                 const {id, name, read} = item;
                                 const rootClass = [];

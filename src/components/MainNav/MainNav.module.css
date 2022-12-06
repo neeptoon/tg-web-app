@@ -61,5 +61,8 @@
   font-size: 10px;
   color: var(--third-gray);
 }
+.info b {
+  font-weight: 800;
+}
 
 /*# sourceMappingURL=MainNav.module.css.map */

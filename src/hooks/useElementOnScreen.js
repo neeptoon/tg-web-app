@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from 'react';
 
-export const useElementOnScreen = (options) => {
+export const useElementOnScreen = (options, id = null) => {
     const containerRef = useRef(null);
     const [isVisible, setIsVisible] = useState(false);
 
@@ -21,7 +21,7 @@ export const useElementOnScreen = (options) => {
         return () => {
             if(containerRef.current) observer.unobserve(containerRef.current);
         };
-    }, [containerRef, options]);
+    }, [containerRef, options, id]);
 
     return [containerRef, isVisible];
 };

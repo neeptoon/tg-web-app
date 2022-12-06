@@ -24,12 +24,11 @@ export const SingleArticlepage = () => {
     const navigate = useNavigate();
     const page = useRef(null);
 
-
     const [spyOfArticle, isVisibleSpyOfArticle] = useElementOnScreen({
         root: null,
         rootMargin: '80px',
-        unobserve: true
-    });
+        unobserve: false
+    }, id);
 
     const [spyOfArrow, isVisibleSpyOfArrow] = useElementOnScreen({
         root: null,
@@ -50,12 +49,12 @@ export const SingleArticlepage = () => {
             analyticService.articleRead(article?.name, id);
         }
 
-    }, [isVisibleSpyOfArticle]);
+    }, [isVisibleSpyOfArticle, id]);
 
     useEffect(() => {
         if(article) {
             analyticService.sendUserMove({
-                source: pathToPage[location.state] || pathToPage[AppRoute.Root],
+                source: pathToPage[location.state] || location.state || pathToPage[AppRoute.Root],
                 target: article.name
             });
         }
@@ -92,7 +91,10 @@ export const SingleArticlepage = () => {
                                     {article.next_id &&
                                         <button
                                             className={classes.nextArticle}
-                                            onClick={() => navigate(`/article/${article.next_id}`, {state: location.pathname})}
+                                            onClick={() => {
+                                                navigate(`/article/${article.next_id}`, {state: article.name});
+                                            }}
+
                                         >изучить следующую статью
                                         </button>
                                     }

@@ -42,6 +42,12 @@
         color: var(--primary-gray);
     }
 
+    iframe {
+        width: 100%;
+        height: unset;
+        aspect-ratio: 1.77;
+    }
+
     ul, ol {
         margin: 0 0 12px;
         font-size: 1em;
@@ -63,6 +69,10 @@
         width: 100% !important;
         height: auto !important;
         max-width: 100% !important;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     table {
@@ -114,12 +124,36 @@
     }
 }
 
-.button {
+.textDecreaseButton {
     position: fixed;
     padding: 0;
-    right: 14px;
+    left: 80vw;
     bottom: 3px;
     border: none;
     background-color: transparent;
+}
+
+.downArrow {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+}
+
+.nextArticle {
+    padding: 0;
+    color: var(--primary-violet);
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2.9px;
+    background-color: transparent;
+    border: none;
+
+    &:hover {
+        cursor: pointer;
+    }
+
 }
 

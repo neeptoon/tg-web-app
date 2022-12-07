@@ -1,5 +1,5 @@
 .page {
-    padding: 35px 0 60px;
+    padding: 35px 0 70px;
     font-size: var(--article-font-size, 12px);
     position: relative;
     transition: font-size 0.2s ease-out;
@@ -121,11 +121,5 @@
     bottom: 3px;
     border: none;
     background-color: transparent;
-}
-
-.downArrow {
-    position: absolute;
-    bottom: 30px;
-    left: 0;
 }
 

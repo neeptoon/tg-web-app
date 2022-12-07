@@ -1,5 +1,5 @@
 .page {
-  padding: 35px 0 60px;
+  padding: 35px 0 70px;
   font-size: var(--article-font-size, 12px);
   position: relative;
   transition: font-size 0.2s ease-out;
@@ -38,6 +38,11 @@
   text-align: left;
   color: var(--primary-gray);
 }
+.text iframe {
+  width: 100%;
+  height: unset;
+  aspect-ratio: 1.77;
+}
 .text ul, .text ol {
   margin: 0 0 12px;
   font-size: 1em;
@@ -56,6 +61,9 @@
   width: 100% !important;
   height: auto !important;
   max-width: 100% !important;
+}
+.text img:hover {
+  cursor: pointer;
 }
 .text table {
   margin-bottom: 15px;
@@ -98,10 +106,10 @@
   background-color: #EAE1EB;
 }
 
-.button {
+.textDecreaseButton {
   position: fixed;
   padding: 0;
-  right: 14px;
+  left: 80vw;
   bottom: 3px;
   border: none;
   background-color: transparent;
@@ -111,6 +119,22 @@
   position: absolute;
   bottom: 30px;
   left: 0;
+}
+
+.nextArticle {
+  padding: 0;
+  color: var(--primary-violet);
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2.9px;
+  background-color: transparent;
+  border: none;
+}
+.nextArticle:hover {
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=SingleArticlepage.module.css.map */

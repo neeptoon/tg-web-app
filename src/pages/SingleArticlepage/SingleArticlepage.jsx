@@ -8,11 +8,10 @@ import {Loader} from '../../components/UI/Loader';
 import {ToPageLink} from '../../components/UI/ToPageLink';
 import {analyticService} from '../../services/analytics';
 import {AppRoute, pathToPage} from '../../const';
-
 import {ReactComponent as IncreasedText} from '../../assets/images/incText.svg';
 import {ReactComponent as DecreasedText} from '../../assets/images/decText.svg';
-
 import {useElementOnScreen} from '../../hooks/useElementOnScreen';
+import {ZoomImageModal} from '../../components/ZoomImageModal';
 
 import classes from './SingleArticlepage.module.scss';
 
@@ -22,13 +21,14 @@ export const SingleArticlepage = () => {
     const [article, setArticle] = useState(null);
     const [decreasedText, setDecreasedText] = useState(false);
     const location = useLocation();
+    const navigate = useNavigate();
     const page = useRef(null);
 
     const [spyOfArticle, isVisibleSpyOfArticle] = useElementOnScreen({
         root: null,
         rootMargin: '80px',
-        unobserve: true
-    });
+        unobserve: false
+    }, id);
 
     const [spyOfArrow, isVisibleSpyOfArrow] = useElementOnScreen({
         root: null,
@@ -44,18 +44,17 @@ export const SingleArticlepage = () => {
         fetchArticle();
     }, [id]);
 
-
     useEffect(() => {
         if(isVisibleSpyOfArticle) {
             analyticService.articleRead(article?.name, id);
         }
 
-    }, [isVisibleSpyOfArticle]);
+    }, [isVisibleSpyOfArticle, id]);
 
     useEffect(() => {
         if(article) {
             analyticService.sendUserMove({
-                source: pathToPage[location.state] || pathToPage[AppRoute.Root],
+                source: pathToPage[location.state] || location.state || pathToPage[AppRoute.Root],
                 target: article.name
             });
         }
@@ -86,24 +85,40 @@ export const SingleArticlepage = () => {
                                     <ToPageLink page={AppRoute.Article} articleName={article.name}/>
                                     <div ref={spyOfArrow}></div>
                                     <h2 className={classes.heading}>{article.name}</h2>
-                                    <div className={classes.content} >
+                                    <div id="content" className={classes.content} >
                                         <div className={classes.text} dangerouslySetInnerHTML={createMarkup()} />
                                     </div>
-                                    <div ref={spyOfArticle} ></div>
+                                    {article.next_id &&
+                                        <button
+                                            className={classes.nextArticle}
+                                            onClick={() => {
+                                                navigate(`/article/${article.next_id}`, {state: article.name});
+                                            }}
+
+                                        >изучить следующую статью
+                                        </button>
+                                    }
+                                    <div ref={spyOfArticle}></div>
                                     <button
-                                        className={classes.button}
+                                        className={classes.textDecreaseButton}
                                         onClick={handleClick}
                                     >
                                         {decreasedText ? <IncreasedText/> : <DecreasedText/>}
                                         <span className="visually-hidden">кнопка увеличения текста</span>
                                     </button>
+
+                                    {/*add arrow if aritcle is too long*/}
                                     {!isVisibleSpyOfArrow &&
                                         <div className={classes.downArrow}>
                                             <ToPageLink
                                                 page={AppRoute.Article}
                                                 articleName={article.name}
                                             />
-                                        </div>}
+                                        </div>
+                                    }
+
+                                    {/*add modal by click on image*/}
+                                    <ZoomImageModal/>
                                 </>
                             }
                         </>

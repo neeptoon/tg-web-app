@@ -32,3 +32,7 @@ export function getMarksSlider(minValue, maxValue) {
         {value: maxValue, label: String(maxValue)},
     ];
 }
+
+export function getClientWidth() {
+    return document.documentElement.clientWidth;
+}

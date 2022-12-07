@@ -1,4 +1,4 @@
-import {useLocation, useParams} from 'react-router-dom';
+import {useLocation, useNavigate, useParams} from 'react-router-dom';
 import {useEffect, useRef, useState} from 'react';
 
 import {CustomContainer} from '../../components/UI/CustomContainer';
